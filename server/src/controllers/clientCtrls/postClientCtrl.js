@@ -1,12 +1,12 @@
 require('../../db.js');
 const Client = require('../../collections/Client.js');
 
-const postClientCtrl = async (name, lastname, email, telephone, paymentMethod, sale) => {
+const postClientCtrl = async (name, lastname, email, phone, paymentMethod, sale) => {
     const client = new Client({
         name,
         lastname,
         email,
-        telephone,
+        phone,
         paymentMethod,
         sale
     })

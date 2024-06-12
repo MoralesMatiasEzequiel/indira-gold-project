@@ -24,7 +24,7 @@ const clientSchema = new Schema({
         message: 'Invalid email'
     },
 
-    telephone: {
+    phone: {
         type: Number,
         unique: true,
         require: true,
