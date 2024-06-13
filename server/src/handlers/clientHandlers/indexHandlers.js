@@ -1,18 +1,18 @@
-const getUsersHandler = require('./getUsersHandler');
-const getUsersByNameHandler = require('./getUsersByNameHandler');
-const getUserByEmailHandler = require('./getUserByEmailHandler');
-const getUserByIdHandler = require('./getUserByIdHandler');
-const postUserHandler = require('./postUserHandler');
-const putUserHandler = require('./putUserHandler');
-const deleteUserHandler = require('./deleteUserHandler');
+const getClientsHandler = require('./getClientsHandler.js');
+const getClientByNameHandler = require('./getClientByNameHandler.js');
+const getClientByEmailHandler = require('./getClientByEmailHandler.js');
+const getClientByIdHandler = require('./getClientByIdHandler.js');
+const postClientHandler = require('./postClientHandler.js');
+const putClientHandler = require('./putClientHandler.js');
+const deleteClientHandler = require('./deleteClientHandler.js');
 
 
 module.exports = {
-    getUsersHandler,
-    getUsersByNameHandler,
-    getUserByEmailHandler,
-    getUserByIdHandler,
-    postUserHandler,
-    putUserHandler,
-    deleteUserHandler
+    getClientsHandler,
+    getClientByNameHandler,
+    getClientByEmailHandler,
+    getClientByIdHandler,
+    postClientHandler,
+    putClientHandler,
+    deleteClientHandler
 }
