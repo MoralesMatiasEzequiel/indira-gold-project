@@ -1,7 +1,7 @@
 require('../../db.js');
 const Client = require('../../collections/Client.js');
 
-const putClientCtrl = async (_id, name, lastname, email, telephone, paymentMethod, sale, active) => {
+const putClientCtrl = async (_id, name, lastname, email, phone, paymentMethod, sale, active) => {
     const update = {};
 
     if (name !== null && name !== false) {
@@ -16,8 +16,8 @@ const putClientCtrl = async (_id, name, lastname, email, telephone, paymentMetho
         update.email = email;
     }
 
-    if (telephone !== null && telephone !== false) {
-        update.telephone = telephone;
+    if (phone !== null && phone !== false) {
+        update.phone = phone;
     }
 
     if (paymentMethod !== null && paymentMethod !== false) {
