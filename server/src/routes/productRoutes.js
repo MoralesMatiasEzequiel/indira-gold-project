@@ -4,13 +4,9 @@ const productRouter = require('express').Router();
 const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getProductsSaleHandler, postProductHandler, putProductHandler, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
 
 
-productRouter.get('/', async (req, res) => {
-  return getProductsHandler(req, res);
-});
+productRouter.get('/', getProductsHandler);
 
-productRouter.get('/all', async (req, res) => {
-  return getProductsAllHandler(req, res);
-});
+productRouter.get('/all', getProductsAllHandler);
 
 productRouter.get('/:id', getProductByIdHandler);
 
