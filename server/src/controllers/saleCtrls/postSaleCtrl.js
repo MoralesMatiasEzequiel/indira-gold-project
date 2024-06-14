@@ -3,7 +3,7 @@ const Sale = require('../../collections/Sale.js');
 
 const postSaleCtrl = async (totalAmount, orderNumber, sale, client, product) => {
   
-    const sale = {
+    const newSale = {
         totalAmount,
         orderNumber,
         sale, 
@@ -11,9 +11,9 @@ const postSaleCtrl = async (totalAmount, orderNumber, sale, client, product) => 
         product
     }
 
-    const newSale = await Sale.create(sale);
+    const saleCreated = await Sale.create(newSale);
 
-    return newSale;
+    return saleCreated;
 };
 
 module.exports = postSaleCtrl;

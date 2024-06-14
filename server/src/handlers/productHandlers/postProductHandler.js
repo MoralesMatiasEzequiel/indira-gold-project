@@ -13,16 +13,16 @@ const postProductHandler = async (req, res) => {
       typeof name !== 'string') {
       return res.status(400).send({ error: 'Incorrect DataType - name' });
     }
-    if (color && !Array.isArray(color)) {
-      return res.status(400).send({ error: 'Incorrect DataType - color' });
-    }
+    // if (color && !Array.isArray(color)) {
+    //   return res.status(400).send({ error: 'Incorrect DataType - color' });
+    // }
     
     if (typeof description !== 'string') {
       return res.status(400).send({ error: 'Incorrect DataType - description' });
     }
-    if (category && !Array.isArray(category)) {
-      return res.status(400).send({ error: 'Incorrect DataType - category' });
-    }
+    // if (category && !Array.isArray(category)) {
+    //   return res.status(400).send({ error: 'Incorrect DataType - category' });
+    // }
 
     let existingProduct = await Product.findOne({ name, active: false });
 

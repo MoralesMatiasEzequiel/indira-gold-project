@@ -3,9 +3,12 @@ const Category = require('../../collections/Category.js');
 
 const postCategoryCtrl = async (name, categories) => {
   
+    // const category = {
+    //   name,
+    //   categories
+    // }
     const category = {
-      name,
-      categories
+      name
     }
 
     const newCategory = await Category.create(category);

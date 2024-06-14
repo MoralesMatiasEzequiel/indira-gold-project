@@ -2,7 +2,8 @@ require('../../db.js');
 const Client = require('../../collections/Client.js');
 
 const postClientCtrl = async (name, lastname, email, phone, paymentMethod, sale) => {
-    const client = new Client({
+   
+    const newClient = new Client({
         name,
         lastname,
         email,
@@ -11,9 +12,9 @@ const postClientCtrl = async (name, lastname, email, phone, paymentMethod, sale)
         sale
     })
 
-    const newClient = await Client.create(client);
+    const clientCreated = await Client.create(newClient);
 
-    return newClient;
+    return clientCreated;
 };
 
 module.exports = postClientCtrl;

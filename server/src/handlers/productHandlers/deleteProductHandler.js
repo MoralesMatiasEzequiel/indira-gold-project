@@ -9,7 +9,7 @@ const deleteProductHandler = async (req, res) => {
         res.status(200).send(`Product has been deleted`);
 
     } catch (error) {
-       return res.status(500).json({ description: `There's no product with ID: ${_id}` });
+       return res.status(500).json({ description: `There's no product with this ID: ${_id}` });
     }
 };
 

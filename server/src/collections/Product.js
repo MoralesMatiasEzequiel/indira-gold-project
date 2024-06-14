@@ -9,7 +9,10 @@ const productSchema = new Schema({
     },
 
     color: {
-        type: [String],
+        type: [{
+            rojo: {},
+            negro: {}
+        }],
         message: 'Invalid color array'
     },
         

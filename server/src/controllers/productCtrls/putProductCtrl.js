@@ -7,7 +7,6 @@ const putProductCtrl = async (_id, name, color, description, category) => {
         {_id},
         {$set: {name, color, description, category}}
     );
-
     return updated;
 };
 
