@@ -7,9 +7,8 @@ const putProductStatusCtrl = async (_id) => {
     const newActiveStatus = !product.active;
 
     const updatedStatus = await Product.updateOne(
-        {_id: _id}, {$set: {active: newActiveStatus}}
+        {_id}, {$set: {active: newActiveStatus}}
     );
-    // console.log(product);
 
     return updatedStatus;
 };
