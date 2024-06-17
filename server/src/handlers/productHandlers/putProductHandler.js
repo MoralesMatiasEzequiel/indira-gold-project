@@ -10,7 +10,6 @@ const putProductHandler = async (req, res) => {
         (color && !Array.isArray(color)) ||
         (description && typeof description !== 'string') ||
         (category && !Array.isArray(category))
-        // (active && typeof active !== 'boolean')
     ){
         return res.status(400).send({ error: 'Incorrect DataType' });
       }

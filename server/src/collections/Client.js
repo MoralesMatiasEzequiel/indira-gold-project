@@ -58,7 +58,7 @@ const clientSchema = new Schema({
     }
 });
 
-const Client = model('Client', clientSchema);
+// const Client = model('Client', clientSchema);
 
-module.exports = { Client, paymentMethodEnum };
-// module.exports = model('Client', clientSchema);
+// module.exports = { Client, paymentMethodEnum }; //Me esta dando erro esta linea
+module.exports = model('Client', clientSchema);
