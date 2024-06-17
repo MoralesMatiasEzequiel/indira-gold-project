@@ -1,10 +1,10 @@
 const deleteClientCtrl = require('../../controllers/clientCtrls/deleteClientCtrl.js');
 
 const deleteClientHandler = async (req, res) => {
-    const { _id } = req.params;
+    const { id } = req.params;
 
     try {
-        const deleted = await deleteClientCtrl(_id);
+        const deleted = await deleteClientCtrl(id);
 
         res.status(200).send(`Client has been deleted`);
 

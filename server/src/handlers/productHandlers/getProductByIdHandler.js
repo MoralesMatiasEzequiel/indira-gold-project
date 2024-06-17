@@ -6,10 +6,14 @@ const getProductByIdHandler = async (req, res) => {
     try {
         const product = await getProductByIdCtrl(id);
 
+        if (!product) {
+            return res.status(404).send(`No product found with ID: "${id}"`);
+        }
+
         res.status(200).send(product);
 
     } catch (error) {
-        res.status(400).send({ description: `There's no product with ID: ${id}` }); 
+        res.status(500).json({ error: error.message }); 
     }
 };
 

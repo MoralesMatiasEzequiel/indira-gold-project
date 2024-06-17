@@ -46,7 +46,5 @@ const saleSchema = new Schema({
     ],
 });
 
-const Sale = model('Sale', saleSchema);
 
-module.exports = { Sale, saleEnum };
-// module.exports = model('Sale', saleSchema);
+module.exports = model('Sale', saleSchema);

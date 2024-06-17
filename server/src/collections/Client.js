@@ -5,28 +5,24 @@ const paymentMethodEnum = ['Efectivo', 'Credito', 'Debito', 'Transferencia'];
 const clientSchema = new Schema({
     name: {
         type: String,
-        unique: true,
         require: true,
         message: 'Invalid name'
     },
 
     lastname: {
         type: String,
-        unique: true,
         require: true,
         message: 'Invalid lastname'
     },
 
     email: {
         type: String,
-        unique: true,
         require: true,
         message: 'Invalid email'
     },
 
     phone: {
         type: Number,
-        unique: true,
         require: true,
         message: 'Invalid telephone'
     },
@@ -58,7 +54,5 @@ const clientSchema = new Schema({
     }
 });
 
-// const Client = model('Client', clientSchema);
 
-// module.exports = { Client, paymentMethodEnum }; //Me esta dando erro esta linea
 module.exports = model('Client', clientSchema);

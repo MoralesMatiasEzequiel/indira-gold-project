@@ -1,10 +1,10 @@
 const deleteProductCtrl = require('../../controllers/productCtrls/deleteProductCtrl.js')
 
 const deleteProductHandler = async (req, res) => {
-    const { _id } = req.params;
+    const { id } = req.params;
 
     try {
-        const deleted = await deleteProductCtrl(_id);
+        const deleted = await deleteProductCtrl(id);
 
         res.status(200).send(`Product has been deleted`);
 
