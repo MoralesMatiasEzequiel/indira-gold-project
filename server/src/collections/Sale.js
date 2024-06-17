@@ -5,13 +5,12 @@ const saleEnum = ['Online', 'Local'];
 const saleSchema = new Schema({
     totalAmount: {
         type: Number,
-        unique: true,
         require: true,
         message: 'Invalid totalAmount'
     },
 
     orderNumber: {
-        type: Number,
+        type: String,
         unique: true,
         require: true,
         message: 'Invalid orderNumber'

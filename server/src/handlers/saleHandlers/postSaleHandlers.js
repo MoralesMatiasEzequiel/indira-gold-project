@@ -26,7 +26,7 @@ const postSalesHandler = async (req, res) => {
 
     const newSale = await postSaleCtrl(totalAmount, orderNumber, sale, client, product);
 
-    res.status(200).send('Sale created');
+    res.status(200).send(newSale);
 
   } catch (error) {
     return res.status(500).send({ error: error.message });
