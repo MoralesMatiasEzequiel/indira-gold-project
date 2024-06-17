@@ -1,7 +1,7 @@
 require('../../db.js');
 const Client = require('../../collections/Client.js');
 
-const putClientCtrl = async (_id, name, lastname, email, phone, paymentMethod, sale, active) => {
+const putClientCtrl = async (_id, name, lastname, email, phone, paymentMethod, sale) => {
     const update = {};
 
     if (name !== null && name !== false) {
@@ -28,11 +28,8 @@ const putClientCtrl = async (_id, name, lastname, email, phone, paymentMethod, s
         update.sale = sale;
     }
 
-    if (active !== null && active !== false) {
-        update.active = active;
-    }
-
-    const updated = await Client.findOneAndUpdate({ _id }, { $set: { active } }, { new: true });
+    // const updated = await Client.findOneAndUpdate({ _id }, { $set: { active } }, { new: true });
+    const updated = await Client.updateOne({_id}, {$set: {name, lastname, email, phone, paymentMethod, sale}});
 
     return updated;
 };

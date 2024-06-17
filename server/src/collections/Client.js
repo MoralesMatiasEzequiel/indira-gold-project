@@ -22,7 +22,7 @@ const clientSchema = new Schema({
     },
 
     phone: {
-        type: Number,
+        type: String,
         require: true,
         message: 'Invalid telephone'
     },

@@ -4,6 +4,7 @@ const getClientByEmailHandler = require('./getClientByEmailHandler.js');
 const getClientByIdHandler = require('./getClientByIdHandler.js');
 const postClientHandler = require('./postClientHandler.js');
 const putClientHandler = require('./putClientHandler.js');
+const putClientStatusHandler = require('./putClientStatusHandler.js')
 const deleteClientHandler = require('./deleteClientHandler.js');
 
 
@@ -14,5 +15,6 @@ module.exports = {
     getClientByIdHandler,
     postClientHandler,
     putClientHandler,
+    putClientStatusHandler,
     deleteClientHandler
 }
