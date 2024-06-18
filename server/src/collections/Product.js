@@ -3,17 +3,14 @@ const { Schema, model } = require('mongoose');
 const productSchema = new Schema({
     name: {
         type: String,
-        unique: true,
         require: true,
         message: 'Invalid name'
     },
 
     color: {
-        type: [{
-            rojo: {},
-            negro: {}
-        }],
-        message: 'Invalid color array'
+        type: Object,
+        require: true,
+        message: 'Invalid name'
     },
         
     description: String,
