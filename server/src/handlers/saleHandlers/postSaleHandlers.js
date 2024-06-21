@@ -11,7 +11,7 @@ const postSalesHandler = async (req, res) => {
     if (typeof totalAmount !== 'number') {
       return res.status(400).send({ error: 'Incorrect DataType - totalAmount' });
     }
-    if (typeof orderNumber !== 'number') {
+    if (typeof orderNumber !== 'string') {
         return res.status(400).send({ error: 'Incorrect DataType - orderNumber' });
     }
     if (sale && !Array.isArray(sale)) {
