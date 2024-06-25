@@ -12,9 +12,13 @@ const productSchema = new Schema({
         require: true,
         message: 'Invalid name'
     },
-        
-    description: String,
-    
+
+    price: {
+        type: Number,
+        require: true,
+        message: 'Invalid price'
+    },
+            
     category: [
         {
           type: Schema.Types.ObjectId,

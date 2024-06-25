@@ -1,13 +1,9 @@
 const { Schema, model } = require('mongoose');
 
-const saleEnum = ['Online', 'Local'];
+const paymentMethodEnum = ['Efectivo', 'Credito', 'Debito', 'Transferencia'];
+const saldInEnum = ['Online', 'Local'];
 
 const saleSchema = new Schema({
-    totalAmount: {
-        type: Number,
-        require: true,
-        message: 'Invalid totalAmount'
-    },
 
     orderNumber: {
         type: String,
@@ -16,33 +12,51 @@ const saleSchema = new Schema({
         message: 'Invalid orderNumber'
     },
 
-    sale: {
+    client: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Client',
+            default: 'Anónimo'
+        }
+    ],
+
+    paymentMethod: {
         type: [{
             type: String,
-            enum: saleEnum
+            enum: paymentMethodEnum
           }],
           required: true,
-          message: 'Invalid sale (online/local)'
+          message: 'Invalid paymentMethod'
     },
+
+    soldIn: {  
+        type: [{
+            type: String,
+            enum: saldInEnum
+          }],
+          required: true,
+          message: 'Invalid sold in Online/Local'
+    },
+
+    discount: {
+        type: Number,
+        require: true,
+        default: 0,
+        message: 'Invalid discount'
+    },
+
+    products: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Product'
+        }
+    ],
 
     date: {
         type: Date,
         default: new Date() // Fecha de creacion de cuenta del usuario. Si el usuario no ingresa una fecha, por defecto se podrá la fecha actual. 
     },
     
-    client: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: 'Client'
-        }
-    ],
-
-    product: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: 'Product'
-        }
-    ],
 });
 
 

@@ -1,11 +1,11 @@
 const Product = require('../../collections/Product.js');
 
-const postProductCtrl = async (name, color, description, category) => {
+const postProductCtrl = async (name, color, price, category) => {
   
     const newProduct = {
       name,
       color,
-      description,
+      price,
       category
     }
 
