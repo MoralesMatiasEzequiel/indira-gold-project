@@ -1,13 +1,12 @@
 const Client = require('../../collections/Client.js');
 
-const postClientCtrl = async (name, lastname, email, phone, paymentMethod, sale) => {
+const postClientCtrl = async (name, lastname, email, phone, shopping) => {
     const newClient = {
         name,
         lastname,
         email,
         phone,
-        paymentMethod,
-        sale
+        shopping
     };
 
     const clientCreated = await Client.create(newClient);
