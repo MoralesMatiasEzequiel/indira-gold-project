@@ -1,30 +1,38 @@
 const postSaleCtrl = require('../../controllers/saleCtrls/postSaleCtrl.js');
 
 const postSalesHandler = async (req, res) => {
-  const { totalAmount, orderNumber, sale, client, product } = req.body;
+  const { orderNumber, paymentMethod, soldIn, discount, products } = req.body;
 
   try {
-    if (!totalAmount || !orderNumber || !sale || !client || !product) {
+    if (!orderNumber || !paymentMethod || !soldIn || !discount || !products) {
       return res.status(400).send({ error: 'Missing data' });
     }
 
-    if (typeof totalAmount !== 'number') {
-      return res.status(400).send({ error: 'Incorrect DataType - totalAmount' });
-    }
     if (typeof orderNumber !== 'string') {
-        return res.status(400).send({ error: 'Incorrect DataType - orderNumber' });
-    }
-    if (sale && !Array.isArray(sale)) {
-      return res.status(400).send({ error: 'Incorrect DataType - sale' });
-    }
-    if (client && !Array.isArray(client)) {
-      return res.status(400).send({ error: 'Incorrect DataType - client' });
-    }
-    if (product && !Array.isArray(product)) {
-      return res.status(400).send({ error: 'Incorrect DataType - product' });
+      return res.status(400).send({ error: 'Incorrect DataType - orderNumber' });
     }
 
-    const newSale = await postSaleCtrl(totalAmount, orderNumber, sale, client, product);
+    // if (client && !Array.isArray(client)) {
+    //   return res.status(400).send({ error: 'Incorrect DataType - client' });
+    // }
+
+    if (paymentMethod && !Array.isArray(paymentMethod)) {
+      return res.status(400).send({ error: 'Incorrect DataType - paymentMethod' });
+    }
+
+    if (soldIn && !Array.isArray(soldIn)) {
+      return res.status(400).send({ error: 'Incorrect DataType - soldIn' });
+    }    
+
+    if (typeof discount !== 'number') {
+      return res.status(400).send({ error: 'Incorrect DataType - discount' });
+    }
+    
+    if (products && !Array.isArray(products)) {
+      return res.status(400).send({ error: 'Incorrect DataType - products' });
+    }
+
+    const newSale = await postSaleCtrl(orderNumber, paymentMethod, soldIn, discount, products);
 
     res.status(200).send(newSale);
 

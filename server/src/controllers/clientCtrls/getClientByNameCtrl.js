@@ -3,7 +3,9 @@ const Client = require('../../collections/Client.js');
 
 const getClientByNameCtrl = async (name) => {
   if (name) {
-    const clientByName = await Client.find({ name: { $regex: name, $options: 'i' } });
+    const clientByName = await Client.find({ name: { $regex: name, $options: 'i' } }).populate({
+      path: 'shopping'
+  });
     return clientByName;
   }
 };

@@ -1,14 +1,14 @@
 require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 
-const postSaleCtrl = async (totalAmount, orderNumber, sale, client, product) => {
+const postSaleCtrl = async (orderNumber, paymentMethod, soldIn, discount, products) => {
   
     const newSale = {
-        totalAmount,
         orderNumber,
-        sale, 
-        client, 
-        product
+        paymentMethod,
+        soldIn,
+        discount,
+        products
     }
 
     const saleCreated = await Sale.create(newSale);
