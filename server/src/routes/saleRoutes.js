@@ -1,8 +1,8 @@
 const saleRouter = require('express').Router();
-const { getSalesHandlers, postSaleHandlers } = require('../handlers/saleHandlers/indexHandlers.js');
+const { getSalesHandlers, getSaleByIdCtrl, postSaleHandlers } = require('../handlers/saleHandlers/indexHandlers.js');
 
 saleRouter.get('/', getSalesHandlers);
-
+saleRouter.get('/:id', getSaleByIdCtrl);
 saleRouter.post('/', postSaleHandlers);
 
 module.exports = saleRouter;
