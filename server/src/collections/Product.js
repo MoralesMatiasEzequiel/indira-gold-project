@@ -25,6 +25,10 @@ const productSchema = new Schema({
           ref: 'Category'
         }
     ],
+
+    imageGlobal: {
+        type: String
+    },
     
     active: {
         type: Boolean,
