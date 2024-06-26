@@ -44,14 +44,18 @@ const productSchema = new Schema({
         type: Number,
         required: [true, 'Invalid price']
     },
+    imageGlobal: {
+        type: String
+    },
+    description: {
+        type: String
+    },
     category: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Category'
         }
     ],
-    imageGlobal: String,
-    description: String,
     active: {
         type: Boolean,
         default: true
