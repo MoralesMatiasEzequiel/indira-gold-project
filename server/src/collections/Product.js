@@ -28,9 +28,7 @@ const colorSchema = new Schema({
         required: true
     },
     size: [sizeSchema],
-    image: {
-        type: String
-    }
+    image: String
 });
 
 const productSchema = new Schema({
@@ -52,9 +50,8 @@ const productSchema = new Schema({
             ref: 'Category'
         }
     ],
-    imageGlobal: {
-        type: String
-    },
+    imageGlobal: String,
+    description: String,
     active: {
         type: Boolean,
         default: true
