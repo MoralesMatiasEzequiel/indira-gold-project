@@ -1,10 +1,16 @@
-// const productRouter = Router();
-// const { Router } = require('express');
 const productRouter = require('express').Router();
-const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getProductsSaleHandler, postProductHandler, putProductHandler, putProductStatusCtrl, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
+const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getProductByNameHandler, getProductsSaleHandler, postProductHandler, putProductHandler, putProductStatusCtrl, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
 
+productRouter.get('/', async (req, res) => {
+    
+    const { name } = req.query;
 
-productRouter.get('/', getProductsHandler);
+    if (name) {
+        return getProductByNameHandler(req, res);
+    }
+
+    return getProductsHandler(req, res); 
+});
 
 productRouter.get('/all', getProductsAllHandler);
 
