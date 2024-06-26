@@ -1,31 +1,61 @@
 const { Schema, model } = require('mongoose');
 
+const measurementSchema = new Schema({
+    width: String,
+    length: String,
+    rise: String
+});
+
+const sizeSchema = new Schema({
+    sizeName: {
+        type: String,
+        required: true
+    },
+    measurements: [measurementSchema],
+    code: {
+        type: String,
+        required: true
+    },
+    stock: {
+        type: Number,
+        required: true
+    }
+});
+
+const colorSchema = new Schema({
+    colorName: {
+        type: String,
+        required: true
+    },
+    size: [sizeSchema],
+    image: String
+});
+
 const productSchema = new Schema({
     name: {
         type: String,
-        require: true,
-        message: 'Invalid name'
+        required: [true, 'Invalid name']
     },
-
     color: {
-        type: Object,
-        require: true,
-        message: 'Invalid name'
+        type: [colorSchema],
+        required: [true, 'Invalid color']
     },
-
     price: {
         type: Number,
-        require: true,
-        message: 'Invalid price'
+        required: [true, 'Invalid price']
     },
-            
+    imageGlobal: {
+        type: String
+    },
+    description: {
+        type: String
+    },
     category: [
         {
-          type: Schema.Types.ObjectId,
-          ref: 'Category'
+            type: Schema.Types.ObjectId,
+            ref: 'Category'
         }
     ],
-    
     active: {
         type: Boolean,
         default: true
