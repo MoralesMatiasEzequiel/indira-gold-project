@@ -9,13 +9,22 @@ const postSaleCtrl = async (orderNumber, paymentMethod, soldIn, discount, produc
     const productsID = await Product.find({ '_id': { $in: products } });
 
     // Calculo el precio total sumando los precios de los productos
-    const totalPrice = productsID.reduce((total, product) => total + product.price, 0);
+    const subTotal = productsID.reduce((total, product) => total + product.price, 0);
+    
+    // Calculo el descuento aplicado
+    const discountApplied = (subTotal * discount) / 100;
+
+    // Calculo el precio total después de aplicar el descuento
+    const totalPrice = subTotal - discountApplied;
+    
     const newSale = {
         orderNumber,
         paymentMethod,
         soldIn,
         discount,
         products,
+        subTotal,
+        discountApplied,
         totalPrice
     }
 

@@ -40,8 +40,8 @@ const saleSchema = new Schema({
 
     discount: {
         type: Number,
-        require: true,
         default: 0,
+        require: true,
         message: 'Invalid discount'
     },
 
@@ -51,6 +51,18 @@ const saleSchema = new Schema({
           ref: 'Product'
         }
     ],
+
+    subTotal: {
+        type: Number,
+        require: true,
+        message: 'Invalid subTotal'
+    },
+
+    discountApplied: {
+        type: Number,
+        require: true,
+        message: 'Invalid discountApplied'
+    },
 
     totalPrice: {
         type: Number,
