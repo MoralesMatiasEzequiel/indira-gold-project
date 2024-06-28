@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const measurementSchema = new Schema({
     width: String,
-    length: String,
+    long: String,
     rise: String
 });
 
