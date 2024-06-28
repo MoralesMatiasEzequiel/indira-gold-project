@@ -29,7 +29,7 @@ const saleSchema = new Schema({
           message: 'Invalid paymentMethod'
     },
 
-    soldIn: {  
+    soldAt: {  
         type: [{
             type: String,
             enum: saldInEnum
@@ -74,6 +74,11 @@ const saleSchema = new Schema({
         type: Date,
         default: new Date() // Fecha de creacion de cuenta del usuario. Si el usuario no ingresa una fecha, por defecto se podrá la fecha actual. 
     },
+    
+    active: {
+        type: Boolean,
+        default: true
+    }
     
 });
 

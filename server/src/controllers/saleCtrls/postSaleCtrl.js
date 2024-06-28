@@ -3,7 +3,7 @@ const Sale = require('../../collections/Sale.js');
 const Product = require('../../collections/Product.js');
 
 
-const postSaleCtrl = async (orderNumber, paymentMethod, soldIn, discount, products) => {
+const postSaleCtrl = async (orderNumber, paymentMethod, soldAt, discount, products) => {
 
     // Obtengo los productos desde la base de datos usando sus IDs
     const productsID = await Product.find({ '_id': { $in: products } });
@@ -20,7 +20,7 @@ const postSaleCtrl = async (orderNumber, paymentMethod, soldIn, discount, produc
     const newSale = {
         orderNumber,
         paymentMethod,
-        soldIn,
+        soldAt,
         discount,
         products,
         subTotal,
