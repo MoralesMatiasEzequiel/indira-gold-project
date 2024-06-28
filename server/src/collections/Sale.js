@@ -52,6 +52,12 @@ const saleSchema = new Schema({
         }
     ],
 
+    totalPrice: {
+        type: Number,
+        require: true,
+        message: 'Invalid totalPrice'
+    },
+
     date: {
         type: Date,
         default: new Date() // Fecha de creacion de cuenta del usuario. Si el usuario no ingresa una fecha, por defecto se podrá la fecha actual. 
