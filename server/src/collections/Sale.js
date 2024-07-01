@@ -86,5 +86,20 @@ saleSchema.pre('save', function(next) {
     next();
 });
 
+saleSchema.pre('save', async function(next) {
+    if (!this.orderNumber) {
+        try {
+            this.orderNumber = await getNextOrderNumber();
+            console.log('Generated Order Number:', this.orderNumber); // Añadir esta línea
+            if (!this.orderNumber) {
+                throw new Error('Failed to generate order number');
+            }
+        } catch (error) {
+            return next(error);
+        }
+    }
+    next();
+});
+
 
 module.exports = model('Sale', saleSchema);
