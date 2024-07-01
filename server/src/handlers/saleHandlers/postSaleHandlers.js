@@ -1,17 +1,13 @@
 const postSaleCtrl = require('../../controllers/saleCtrls/postSaleCtrl.js');
 
 const postSalesHandler = async (req, res) => {
-  const { orderNumber, paymentMethod, soldAt, discount, products, client } = req.body;
+  const { paymentMethod, soldAt, discount, products, client } = req.body;
 
   try {
     
     //saqué discount de esta comprobación porque no siempre va a haber un descuento, entonces si el descuento es 0, siempre va a faltar data porque 0 es igual a null
-    if (!orderNumber || !paymentMethod || !soldAt || !products) {
+    if (!paymentMethod || !soldAt || !products) {
       return res.status(400).send({ error: 'Missing data' });
-    }
-
-    if (typeof orderNumber !== 'string') {
-      return res.status(400).send({ error: 'Incorrect DataType - orderNumber' });
     }
 
     //corregí esta comprobación para estar acorde a cómo es el modelo Sale ahora
@@ -35,12 +31,12 @@ const postSalesHandler = async (req, res) => {
     }
 
     //y agregué esta comprobación para asegurarme que client es un string
-    
+
     if (client && typeof client !== 'string') {
       return res.status(400).send({ error: 'Incorrect DataType - client' });
     }
 
-    const newSale = await postSaleCtrl(orderNumber, paymentMethod, soldAt, discount, products, client);
+    const newSale = await postSaleCtrl(paymentMethod, soldAt, discount, products, client);
 
     res.status(200).send(newSale);
 
