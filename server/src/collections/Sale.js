@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const paymentMethodEnum = ['Efectivo', 'Crédito', 'Débito', 'Transferencia'];
-const saldInEnum = ['Online', 'Local'];
+const saldAtEnum = ['Online', 'Local'];
 
 const saleSchema = new Schema({
 
@@ -13,7 +13,6 @@ const saleSchema = new Schema({
     },
 
     //client siempre va a haber uno solo así que no era necesario que sea array. También cambié el default a null porque no se puede declara que el tpye va a ser un ObjectID y luego reemplazarlo por un string
-
     client: {
             type: Schema.Types.ObjectId,
             ref: 'Client',
@@ -21,7 +20,6 @@ const saleSchema = new Schema({
     },
 
     //lo mismo con paymentMethod, salvo que una venta se pague con más de un método, en ese caso no sé si enum será el formato que tendríamos que usar
-
     paymentMethod: {
         type: String,
         enum: paymentMethodEnum,
@@ -30,10 +28,9 @@ const saleSchema = new Schema({
     },
 
     //acá tampoco tiene sentido usar array, siempre va a ser uno u otro
-
     soldAt: {  
         type: String,
-        enum: saldInEnum,
+        enum: saldAtEnum,
         required: true,
         message: 'Invalid sold in Online/Local'
     },
@@ -72,7 +69,7 @@ const saleSchema = new Schema({
 
     date: {
         type: Date,
-        default: new Date() // Fecha de creacion de cuenta del usuario. Si el usuario no ingresa una fecha, por defecto se podrá la fecha actual. 
+        default: null,
     },
     
     active: {
@@ -80,6 +77,17 @@ const saleSchema = new Schema({
         default: true
     }
     
+});
+
+// Middleware para ajustar la fecha antes de guardar
+saleSchema.pre('save', function(next) {
+    if (!this.date) {
+        const now = new Date();
+        // Ajusta la fecha a la zona horaria de Argentina
+        const offset = now.getTimezoneOffset() * 60000;
+        this.date = new Date(now.getTime() - offset);
+    }
+    next();
 });
 
 

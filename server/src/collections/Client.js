@@ -34,13 +34,24 @@ const clientSchema = new Schema({
 
     date: {
         type: Date,
-        default: new Date() // Fecha de creacion de cuenta del usuario. Si el usuario no ingresa una fecha, por defecto se podrá la fecha actual. 
+        default: null,
     },
     
     active: {
         type: Boolean,
         default: true
     }
+});
+
+// Middleware para ajustar la fecha antes de guardar
+clientSchema.pre('save', function(next) {
+    if (!this.date) {
+        const now = new Date();
+        // Ajusta la fecha a la zona horaria de Argentina
+        const offset = now.getTimezoneOffset() * 60000;
+        this.date = new Date(now.getTime() - offset);
+    }
+    next();
 });
 
 
