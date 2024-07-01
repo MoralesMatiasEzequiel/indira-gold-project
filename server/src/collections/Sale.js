@@ -1,30 +1,32 @@
-const { Schema, model } = require('mongoose');
+// src/collections/Sale.js
+
+const mongoose = require('mongoose');
+const getNextOrderNumber = require('../utils/getNextOrderNumber.js');
+
+const { Schema, model } = mongoose;
 
 const paymentMethodEnum = ['Efectivo', 'Crédito', 'Débito', 'Transferencia'];
 const saldAtEnum = ['Online', 'Local'];
 
 const saleSchema = new Schema({
-
     orderNumber: {
         type: String,
-        unique: true,
-        require: true,
-        message: 'Invalid orderNumber'
+        unique: true
     },
 
     //client siempre va a haber uno solo así que no era necesario que sea array. También cambié el default a null porque no se puede declara que el tpye va a ser un ObjectID y luego reemplazarlo por un string
     client: {
-            type: Schema.Types.ObjectId,
-            ref: 'Client',
-            default: null
+        type: Schema.Types.ObjectId,
+        ref: 'Client',
+        default: null
     },
+
 
     //lo mismo con paymentMethod, salvo que una venta se pague con más de un método, en ese caso no sé si enum será el formato que tendríamos que usar
     paymentMethod: {
         type: String,
         enum: paymentMethodEnum,
-        required: true,
-        message: 'Invalid paymentMethod'
+        required: true
     },
 
     //acá tampoco tiene sentido usar array, siempre va a ser uno u otro
@@ -32,51 +34,45 @@ const saleSchema = new Schema({
         type: String,
         enum: saldAtEnum,
         required: true,
-        message: 'Invalid sold in Online/Local'
+        message: 'Invalid sold at Online/Local'
     },
-
+  
     discount: {
         type: Number,
         default: 0,
-        require: true,
-        message: 'Invalid discount'
+        required: true
     },
-
+  
     products: [
         {
           type: Schema.Types.ObjectId,
           ref: 'Product'
         }
     ],
-
+  
     subTotal: {
         type: Number,
-        require: true,
-        message: 'Invalid subTotal'
+        required: true
     },
-
+  
     discountApplied: {
         type: Number,
-        require: true,
-        message: 'Invalid discountApplied'
+        required: true
     },
-
+  
     totalPrice: {
         type: Number,
-        require: true,
-        message: 'Invalid totalPrice'
+        required: true
     },
-
+  
     date: {
         type: Date,
         default: null,
     },
-    
     active: {
         type: Boolean,
         default: true
     }
-    
 });
 
 // Middleware para ajustar la fecha antes de guardar
