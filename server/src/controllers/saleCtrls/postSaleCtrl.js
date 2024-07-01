@@ -10,13 +10,23 @@ const postSaleCtrl = async (orderNumber, paymentMethod, soldAt, discount, produc
 
     // Calculo el precio total sumando los precios de los productos
     const subTotal = productsID.reduce((total, product) => total + product.price, 0);
-    
-    // Calculo el descuento aplicado
-    const discountApplied = (subTotal * discount) / 100;
 
-    // Calculo el precio total después de aplicar el descuento
-    const totalPrice = subTotal - discountApplied;
-    
+    //Acá declaro la variable totalPrice por fuera del if y la igual al subtotal en el caso que no haya ningún descuento
+    //Lo mismo con discountApplied
+
+    let totalPrice = subTotal;
+    let discountApplied = 0;
+
+    //Acá envolví toda la lógica de descuento aplicado solo en caso de que haya descuento
+
+    if(discount){
+        // Calculo el descuento aplicado
+        discountApplied = (subTotal * discount) / 100;
+
+        // Calculo el precio total después de aplicar el descuento
+        totalPrice = subTotal - discountApplied;
+    }
+
     const newSale = {
         orderNumber,
         paymentMethod,
@@ -26,7 +36,7 @@ const postSaleCtrl = async (orderNumber, paymentMethod, soldAt, discount, produc
         subTotal,
         discountApplied,
         totalPrice,
-        client
+        client: client || null //acá lo manda en null si client viene vacío
     }
 
     const saleCreated = await Sale.create(newSale);

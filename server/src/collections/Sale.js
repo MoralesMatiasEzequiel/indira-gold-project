@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const paymentMethodEnum = ['Efectivo', 'Credito', 'Debito', 'Transferencia'];
+const paymentMethodEnum = ['Efectivo', 'Crédito', 'Débito', 'Transferencia'];
 const saldInEnum = ['Online', 'Local'];
 
 const saleSchema = new Schema({
@@ -12,30 +12,30 @@ const saleSchema = new Schema({
         message: 'Invalid orderNumber'
     },
 
-    client: [
-        {
+    //client siempre va a haber uno solo así que no era necesario que sea array. También cambié el default a null porque no se puede declara que el tpye va a ser un ObjectID y luego reemplazarlo por un string
+
+    client: {
             type: Schema.Types.ObjectId,
             ref: 'Client',
-            default: 'Anónimo'
-        }
-    ],
-
-    paymentMethod: {
-        type: [{
-            type: String,
-            enum: paymentMethodEnum
-          }],
-          required: true,
-          message: 'Invalid paymentMethod'
+            default: null
     },
 
+    //lo mismo con paymentMethod, salvo que una venta se pague con más de un método, en ese caso no sé si enum será el formato que tendríamos que usar
+
+    paymentMethod: {
+        type: String,
+        enum: paymentMethodEnum,
+        required: true,
+        message: 'Invalid paymentMethod'
+    },
+
+    //acá tampoco tiene sentido usar array, siempre va a ser uno u otro
+
     soldAt: {  
-        type: [{
-            type: String,
-            enum: saldInEnum
-          }],
-          required: true,
-          message: 'Invalid sold in Online/Local'
+        type: String,
+        enum: saldInEnum,
+        required: true,
+        message: 'Invalid sold in Online/Local'
     },
 
     discount: {
