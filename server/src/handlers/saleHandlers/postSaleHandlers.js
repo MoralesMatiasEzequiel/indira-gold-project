@@ -4,7 +4,9 @@ const postSalesHandler = async (req, res) => {
   const { orderNumber, paymentMethod, soldAt, discount, products, client } = req.body;
 
   try {
-    if (!orderNumber || !paymentMethod || !soldAt || !discount || !products) {
+    
+    //saqué discount de esta comprobación porque no siempre va a haber un descuento, entonces si el descuento es 0, siempre va a faltar data porque 0 es igual a null
+    if (!orderNumber || !paymentMethod || !soldAt || !products) {
       return res.status(400).send({ error: 'Missing data' });
     }
 
@@ -12,11 +14,15 @@ const postSalesHandler = async (req, res) => {
       return res.status(400).send({ error: 'Incorrect DataType - orderNumber' });
     }
 
-    if (paymentMethod && !Array.isArray(paymentMethod)) {
+    //corregí esta comprobación para estar acorde a cómo es el modelo Sale ahora
+
+    if (typeof paymentMethod !== 'string') {
       return res.status(400).send({ error: 'Incorrect DataType - paymentMethod' });
     }
 
-    if (soldAt && !Array.isArray(soldAt)) {
+    //lo mismo acá
+
+    if (typeof soldAt !== 'string') {
       return res.status(400).send({ error: 'Incorrect DataType - soldAt' });
     }    
 
@@ -26,6 +32,12 @@ const postSalesHandler = async (req, res) => {
     
     if (products && !Array.isArray(products)) {
       return res.status(400).send({ error: 'Incorrect DataType - products' });
+    }
+
+    //y agregué esta comprobación para asegurarme que client es un string
+    
+    if (client && typeof client !== 'string') {
+      return res.status(400).send({ error: 'Incorrect DataType - client' });
     }
 
     const newSale = await postSaleCtrl(orderNumber, paymentMethod, soldAt, discount, products, client);
