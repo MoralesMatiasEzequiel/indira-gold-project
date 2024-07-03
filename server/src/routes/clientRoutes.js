@@ -1,15 +1,18 @@
 const clientRouter = require('express').Router();
-const { getClientsHandler, getClientByNameHandler, getClientByEmailHandler, getClientByIdHandler, postClientHandler, putClientHandler, putClientStatusHandler, deleteClientHandler } = require('../handlers/clientHandlers/indexHandlers.js');
+const { getClientsHandler, getClientByNameHandler, getClientByLastnameHandler, getClientByEmailHandler, getClientByIdHandler, postClientHandler, putClientHandler, putClientStatusHandler, deleteClientHandler } = require('../handlers/clientHandlers/indexHandlers.js');
 
 clientRouter.get('/', (req, res, next) => {
-    const { name, email } = req.query;
+    const { name, lastname, email } = req.query;
 
     if (name) {
         return getClientByNameHandler(req, res, next);
-    } 
+    }; 
+    if (lastname) {
+        return getClientByLastnameHandler(req, res, next);
+    }; 
     if (email) {
         return getClientByEmailHandler(req, res, next);
-    }
+    };
     return getClientsHandler(req, res, next);   
 });
 

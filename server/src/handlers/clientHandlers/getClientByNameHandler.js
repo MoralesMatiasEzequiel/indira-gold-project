@@ -7,7 +7,8 @@ const getClientByNameHandler = async (req, res) => {
         const clientByName = await getClientByNameCtrl(name);
 
         if (clientByName.length === 0) {
-            return res.status(404).send(`No client found with name: "${name}"`);
+            // return res.status(404).send(`No client found with name: "${name}"`);
+            return res.status(200).send([]);
         }
 
         res.status(200).send(clientByName);
