@@ -5,15 +5,17 @@ const Product = require('../../collections/Product.js');
 
 const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client) => {
 
-    // Obtengo los productos desde la base de datos usando sus IDs
-    const productsID = await Product.find({ '_id': { $in: products } });
-
-    // Calculo el precio total sumando los precios de los productos
-    const subTotal = productsID.reduce((total, product) => total + product.price, 0);
+     // Obtengo los productos desde la base de datos usando sus IDs
+     const productsFromDB = await Product.find({ '_id': { $in: products } });
+ 
+     // Calculo el precio total sumando los precios de los productos considerando las repeticiones
+     const subTotal = products.reduce((total, productId) => {
+         const productFromDB = productsFromDB.find(p => p._id.toString() === productId);
+         return total + (productFromDB ? productFromDB.price : 0);
+     }, 0);
 
     //Acá declaro la variable totalPrice por fuera del if y la igual al subtotal en el caso que no haya ningún descuento
     //Lo mismo con discountApplied
-
     let totalPrice = subTotal;
     let discountApplied = 0;
 
@@ -44,3 +46,10 @@ const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client) =
 };
 
 module.exports = postSaleCtrl;
+
+
+// Obtengo los productos desde la base de datos usando sus IDs
+// const productsID = await Product.find({ '_id': { $in: products } });
+
+// Calculo el precio total sumando los precios de los productos
+// const subTotal = productsID.reduce((total, product) => total + product.price, 0);
