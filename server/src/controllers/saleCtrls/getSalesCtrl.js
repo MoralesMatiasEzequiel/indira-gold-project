@@ -7,8 +7,12 @@ const getSalesCtrl = async () => {
             path: 'client'
         })
         .populate({
-            path: 'products'
+            path: 'products',
+            populate: {
+                path: 'category',
+            }
         });
+
 
     return sales;
 };
