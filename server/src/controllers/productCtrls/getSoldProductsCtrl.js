@@ -39,7 +39,7 @@ const getSoldProductCtrl = async () => {
 
         return resultArray;
     } catch (error) {
-        console.error("Error al obtener los productos vendidos:", error);
+        res.status(500).send({ error: error.message});
     }
 };
 
