@@ -1,5 +1,5 @@
 const saleRouter = require('express').Router();
-const { getSalesHandlers, getSaleByIdHandler, getSaleByOrderNumberHandlers, getSaleByClientNameHandlers, getSalesOnlineHandlers, getSalesLocalHandlers, postSaleHandlers } = require('../handlers/saleHandlers/indexHandlers.js');
+const { getSalesHandlers, getSaleByIdHandler, getSaleByOrderNumberHandlers, getSaleByClientNameHandlers, getSalesOnlineHandlers, getSalesLocalHandlers, getSalesBalanceHandlers, postSaleHandlers } = require('../handlers/saleHandlers/indexHandlers.js');
 
 saleRouter.get('/', async (req, res) => {
     
@@ -17,6 +17,7 @@ saleRouter.get('/', async (req, res) => {
 });
 saleRouter.get('/online', getSalesOnlineHandlers);
 saleRouter.get('/local', getSalesLocalHandlers);
+saleRouter.get('/balance', getSalesBalanceHandlers);
 saleRouter.get('/:id', getSaleByIdHandler);
 saleRouter.post('/', postSaleHandlers);
 
