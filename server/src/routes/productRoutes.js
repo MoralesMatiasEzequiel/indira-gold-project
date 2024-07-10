@@ -1,5 +1,5 @@
 const productRouter = require('express').Router();
-const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getProductByNameHandler, getSoldProductsHandler, postProductHandler, putProductHandler, putProductStatusCtrl, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
+const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getProductByNameHandler, getSoldProductsHandler, getProductsRatingHandler, postProductHandler, putProductHandler, putProductStatusCtrl, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
 
 productRouter.get('/', async (req, res) => {
     
@@ -15,6 +15,8 @@ productRouter.get('/', async (req, res) => {
 productRouter.get('/all', getProductsAllHandler);
 
 productRouter.get('/sold', getSoldProductsHandler);
+
+productRouter.get('/rating', getProductsRatingHandler);
 
 productRouter.get('/:id', getProductByIdHandler);
 

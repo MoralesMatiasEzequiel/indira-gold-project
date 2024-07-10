@@ -3,7 +3,8 @@ const Sale = require('../../collections/Sale.js');
 
 const getSoldProductCtrl = async () => {
     try {
-        const sales = await Sale.find().populate({
+        const sales = await Sale.find()
+        .populate({
             path: 'products',
             populate: {
                 path: 'category',
