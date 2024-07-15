@@ -4,9 +4,10 @@ const getProductByIdHandler = require('./getProductByIdHandler.js');
 const getProductByNameHandler = require('./getProductByNameHandler.js')
 const getSoldProductsHandler = require('./getSoldProductsHandler.js');
 const getProductsRatingHandler = require('./getProductsRatingHandler.js');
+const getProductColorsHandler = require('./getProductColorsHandler.js');
 const postProductHandler = require('./postProductHandler.js');
 const putProductHandler = require('./putProductHandler.js');
-const putProductStatusCtrl = require('./putProductStatusHandler.js')
+const putProductStatusHandler = require('./putProductStatusHandler.js')
 const deleteProductHandler = require('./deleteProductHandler.js');
 
 
@@ -17,8 +18,9 @@ module.exports = {
     getProductByNameHandler,
     getSoldProductsHandler,
     getProductsRatingHandler,
+    getProductColorsHandler,
     postProductHandler,
     putProductHandler,
-    putProductStatusCtrl,
+    putProductStatusHandler,
     deleteProductHandler
 }
