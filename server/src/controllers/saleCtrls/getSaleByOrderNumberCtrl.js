@@ -6,7 +6,7 @@ const getSaleByOrderNumberCtrl = async (orderNumber) => {
     const regex = new RegExp(`.*${orderNumber}.*`, 'i');
 
     if (orderNumber) {
-        const sale = await Sale.find({ orderNumber: regex })
+        const sale = await Sale.find({ orderNumber: regex, active: true })
         .populate({
             path: 'client'
         })

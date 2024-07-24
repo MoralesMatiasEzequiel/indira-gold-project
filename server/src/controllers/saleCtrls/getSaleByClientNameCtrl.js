@@ -18,7 +18,8 @@ const getSaleByClientNameCtrl = async (clientName) => {
         const clientIds = clients.map(client => client._id);
 
         const sales = await Sale.find({
-            client: { $in: clientIds }
+            client: { $in: clientIds },
+            active: true
         })
         .populate('client')
         .populate('products');
