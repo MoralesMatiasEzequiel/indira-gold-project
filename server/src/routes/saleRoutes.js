@@ -13,7 +13,7 @@ saleRouter.get('/', async (req, res) => {
         return getSaleByClientNameHandlers(req, res);
     };
 
-    return getSalesHandlers(req, res); 
+    return getActiveSalesHandler(req, res); 
 });
 saleRouter.get('/online', getSalesOnlineHandlers);
 saleRouter.get('/active', getActiveSalesHandler);

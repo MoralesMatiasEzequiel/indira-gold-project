@@ -3,7 +3,7 @@ const Sale = require('../../collections/Sale.js');
 
 const getSalesBalanceCtrl = async () => {
     try {
-        const sales = await Sale.find().populate('products');
+        const sales = await Sale.find({active: true}).populate('products');
 
         const today = new Date();
         const startOfDay = new Date(today.setHours(0, 0, 0, 0));
