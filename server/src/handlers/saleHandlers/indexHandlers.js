@@ -1,4 +1,5 @@
 const getSalesHandlers = require('./getSalesHandlers.js');
+const getActiveSalesHandler = require('./getActiveSalesHandler.js');
 const getSaleByIdHandler = require('./getSaleByIdHandlers.js');
 const getSaleByOrderNumberHandlers = require('./getSaleByOrderNumberHandlers.js');
 const getSaleByClientNameHandlers = require('./getSaleByClientNameHandlers.js');
@@ -12,6 +13,7 @@ const putSaleStatusHandler = require('./putSaleStatusHandler.js');
 
 module.exports = {
     getSalesHandlers,
+    getActiveSalesHandler,
     getSaleByIdHandler,
     getSaleByOrderNumberHandlers,
     getSaleByClientNameHandlers,
