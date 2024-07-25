@@ -64,6 +64,28 @@ const saleSchema = new Schema({
         type: Number,
         required: true
     },
+
+    //este es el valor que define la retención por cobrar con MercadoPago, esto viene del front
+
+    paymentFee: {
+        type: Number,
+        default: 0,
+        required: true
+    },
+
+    //este valor se calcula a partir del totalPrice, , similar a discountApplied
+
+    paymentFeeApplied:{
+        type: Number,
+        required: true
+    },
+
+    //este valor es el dinero neto que le ingresa al comercio, con este valor se generan las métricas
+
+    totalWithFee: {
+        type: Number,
+        required: true
+    },
   
     date: {
         type: Date,
