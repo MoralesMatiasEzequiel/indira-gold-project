@@ -3,7 +3,7 @@ const Sale = require('../../collections/Sale.js');
 const Product = require('../../collections/Product.js');
 
 
-const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client) => {
+const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client, paymentFee) => {
 
      // Obtengo los productos desde la base de datos usando sus IDs
      const productsFromDB = await Product.find({ '_id': { $in: products } });
@@ -18,6 +18,7 @@ const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client) =
     //Lo mismo con discountApplied
     let totalPrice = subTotal;
     let discountApplied = 0;
+     
 
     //Acá envolví toda la lógica de descuento aplicado solo en caso de que haya descuento
 
@@ -29,6 +30,22 @@ const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client) =
         totalPrice = subTotal - discountApplied;
     }
 
+    //Acá declaro la variable totalWithFee por fuera del if y la igual al totalPrice en el caso que no haya ninguna comisión de MP
+    //Lo mismo con paymentFeeApplied
+
+    let totalWithFee = totalPrice;
+    let paymentFeeApplied = 0;
+
+    //Acá envolví toda la lógica de comisión aplicado solo en caso de que haya comisión
+
+    if(paymentFee){
+        // Calculo la comisión aplicada
+        paymentFeeApplied = (totalPrice * paymentFee) / 100;
+
+        // Calculo el precio con comisión
+        totalWithFee = totalPrice - paymentFeeApplied;
+    }
+
     const newSale = {
         paymentMethod,
         soldAt,
@@ -37,6 +54,9 @@ const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client) =
         subTotal,
         discountApplied,
         totalPrice,
+        paymentFee,
+        paymentFeeApplied,
+        totalWithFee,
         client: client || null //acá lo manda en null si client viene vacío
     }
 

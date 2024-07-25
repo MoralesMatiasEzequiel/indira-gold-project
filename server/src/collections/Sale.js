@@ -65,7 +65,7 @@ const saleSchema = new Schema({
         required: true
     },
 
-    //este es el valor que define la retención por cobrar con MercadoPago, esto viene del front
+    //este es el valor que define la retención por cobrar con MercadoPago, esto viene del front. Es un porcentaje
 
     paymentFee: {
         type: Number,
