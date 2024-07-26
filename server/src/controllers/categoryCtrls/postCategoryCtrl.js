@@ -1,15 +1,11 @@
 require('../../db.js');
 const Category = require('../../collections/Category.js');
 
-const postCategoryCtrl = async (name, categories) => {
+const postCategoryCtrl = async (name) => {
   
-    // const category = {
-    //   name,
-    //   categories
-    // }
     const category = {
       name
-    }
+    };
 
     const newCategory = await Category.create(category);
 
