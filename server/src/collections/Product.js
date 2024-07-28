@@ -48,9 +48,9 @@ const productSchema = new Schema({
     // supplier: {
     //     type: [supplierSchema],
     // },
-    // imageGlobal: {
-    //     type: String
-    // },
+    imageGlobal: {
+        type: String
+    },
     price: {
         type: Number,
         required: [true, 'Invalid price']
