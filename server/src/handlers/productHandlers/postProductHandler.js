@@ -1,40 +1,42 @@
 const postProductCtrl = require('../../controllers/productCtrls/postProductCtrl.js');
 
 const postProductHandler = async (req, res) => {
-  const { name, color, price, category, description } = req.body;
+    const { name, color, price, category, description } = req.body;
 
-  try {
-    if (!name || !color || !price || !category) {
-      return res.status(400).send({ error: 'Missing data' });
-    };
-    // Procesar las imágenes subidas
-    const imagePaths = req.files.map(file => file.path);
-
-    const parsedColor = JSON.parse(color);
-    parsedColor.forEach((c, index) => {
-        if (imagePaths[index]) {
-            c.image = imagePaths[index];
+    try {
+        if (!name || !color || !price || !category) {
+            return res.status(400).send({ error: 'Missing data' });
         }
-    });
 
-    //Este código es para verificar si ya existe el producto creado:
-    // let existingProduct = await Product.findOne({ name, active: false });
+        // Procesar las imágenes subidas
+        const imagePaths = req.files['images'] ? req.files['images'].map(file => file.path) : [];
+        const imageGlobalPath = req.files['imageGlobal'] ? req.files['imageGlobal'][0].path : null;
 
-    // if (existingProduct) {
-    //   existingProduct.active = true;
-    //   await existingProduct.save();
-    //   const _id = existingProduct._id;
-    //   await putProductCtrl(_id, name, color, price, category);
-    //   return res.status(200).send(`The product ${existingProduct.name} has been reactivated and updated`);
-    // }
+        const parsedColor = JSON.parse(color);
+        parsedColor.forEach((c, index) => {
+            if (imagePaths[index]) {
+                c.image = imagePaths[index];
+            }
+        });
 
-    const newProduct = await postProductCtrl(name, parsedColor, price, JSON.parse(category), description);
-    
-    res.status(200).send(newProduct);
+        //Este código es para verificar si ya existe el producto creado:
+        // let existingProduct = await Product.findOne({ name, active: false });
 
-  } catch (error) {
-    return res.status(500).send(error.message);
-  }
+        // if (existingProduct) {
+        //   existingProduct.active = true;
+        //   await existingProduct.save();
+        //   const _id = existingProduct._id;
+        //   await putProductCtrl(_id, name, color, price, category);
+        //   return res.status(200).send(`The product ${existingProduct.name} has been reactivated and updated`);
+        // }
+
+        const newProduct = await postProductCtrl(name, parsedColor, price, JSON.parse(category), description, imageGlobalPath);
+
+        res.status(200).send(newProduct);
+
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
 };
 
 module.exports = postProductHandler;
