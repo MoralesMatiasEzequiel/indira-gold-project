@@ -12,10 +12,10 @@ const sizeSchema = new Schema({
         required: true
     },
     measurements: [measurementSchema],
-    code: {
-        type: String,
-        required: true
-    },
+    // code: {
+    //     type: String,
+    //     required: true
+    // },
     stock: {
         type: Number,
         required: true
@@ -31,6 +31,11 @@ const colorSchema = new Schema({
     image: String
 });
 
+const supplierSchema = new Schema({
+    name: String,
+    phone: String
+});
+
 const productSchema = new Schema({
     name: {
         type: String,
@@ -40,12 +45,15 @@ const productSchema = new Schema({
         type: [colorSchema],
         required: [true, 'Invalid color']
     },
+    // supplier: {
+    //     type: [supplierSchema],
+    // },
+    // imageGlobal: {
+    //     type: String
+    // },
     price: {
         type: Number,
         required: [true, 'Invalid price']
-    },
-    imageGlobal: {
-        type: String
     },
     description: {
         type: String
