@@ -45,9 +45,9 @@ const productSchema = new Schema({
         type: [colorSchema],
         required: [true, 'Invalid color']
     },
-    // supplier: {
-    //     type: [supplierSchema],
-    // },
+    supplier: {
+        type: supplierSchema,
+    },
     imageGlobal: {
         type: String
     },

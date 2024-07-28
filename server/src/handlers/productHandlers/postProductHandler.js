@@ -1,7 +1,7 @@
 const postProductCtrl = require('../../controllers/productCtrls/postProductCtrl.js');
 
 const postProductHandler = async (req, res) => {
-    const { name, color, price, category, description } = req.body;
+    const { name, color, supplier, price, category, description } = req.body;
 
     try {
         if (!name || !color || !price || !category) {
@@ -29,9 +29,8 @@ const postProductHandler = async (req, res) => {
         //   await putProductCtrl(_id, name, color, price, category);
         //   return res.status(200).send(`The product ${existingProduct.name} has been reactivated and updated`);
         // }
-
-        const newProduct = await postProductCtrl(name, parsedColor, price, JSON.parse(category), description, imageGlobalPath);
-
+        
+        const newProduct = await postProductCtrl(name, parsedColor, JSON.parse(supplier), price, JSON.parse(category), description, imageGlobalPath);
         res.status(200).send(newProduct);
 
     } catch (error) {
