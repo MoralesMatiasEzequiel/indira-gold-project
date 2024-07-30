@@ -2,47 +2,32 @@ require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 const Product = require('../../collections/Product.js');
 
-
 const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client, paymentFee) => {
+    // Extraigo los IDs de producto únicos de `products`
+    const uniqueProductIds = [...new Set(products.map(p => p.productId))];
 
-     // Obtengo los productos desde la base de datos usando sus IDs
-     const productsFromDB = await Product.find({ '_id': { $in: products } });
- 
-     // Calculo el precio total sumando los precios de los productos considerando las repeticiones
-     const subTotal = products.reduce((total, productId) => {
-         const productFromDB = productsFromDB.find(p => p._id.toString() === productId);
-         return total + (productFromDB ? productFromDB.price : 0);
-     }, 0);
+    // Obtengo los productos desde la base de datos usando sus IDs únicos
+    const productsFromDB = await Product.find({ '_id': { $in: uniqueProductIds } });
 
-    //Acá declaro la variable totalPrice por fuera del if y la igual al subtotal en el caso que no haya ningún descuento
-    //Lo mismo con discountApplied
+    // Calculo el precio total sumando los precios de los productos considerando las repeticiones
+    const subTotal = products.reduce((total, product) => {
+        const productFromDB = productsFromDB.find(p => p._id.toString() === product.productId.toString());
+        return total + (productFromDB ? productFromDB.price : 0);
+    }, 0);
+
     let totalPrice = subTotal;
     let discountApplied = 0;
-     
 
-    //Acá envolví toda la lógica de descuento aplicado solo en caso de que haya descuento
-
-    if(discount){
-        // Calculo el descuento aplicado
+    if (discount) {
         discountApplied = (subTotal * discount) / 100;
-
-        // Calculo el precio total después de aplicar el descuento
         totalPrice = subTotal - discountApplied;
     }
-
-    //Acá declaro la variable totalWithFee por fuera del if y la igual al totalPrice en el caso que no haya ninguna comisión de MP
-    //Lo mismo con paymentFeeApplied
 
     let totalWithFee = totalPrice;
     let paymentFeeApplied = 0;
 
-    //Acá envolví toda la lógica de comisión aplicado solo en caso de que haya comisión
-
-    if(paymentFee){
-        // Calculo la comisión aplicada
+    if (paymentFee) {
         paymentFeeApplied = (totalPrice * paymentFee) / 100;
-
-        // Calculo el precio con comisión
         totalWithFee = totalPrice - paymentFeeApplied;
     }
 
@@ -57,8 +42,8 @@ const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client, p
         paymentFee,
         paymentFeeApplied,
         totalWithFee,
-        client: client || null //acá lo manda en null si client viene vacío
-    }
+        client: client || null
+    };
 
     const saleCreated = await Sale.create(newSale);
 
@@ -66,6 +51,7 @@ const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client, p
 };
 
 module.exports = postSaleCtrl;
+
 
 
 // Obtengo los productos desde la base de datos usando sus IDs
