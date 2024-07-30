@@ -25,7 +25,7 @@ const clientSchema = new Schema({
         message: 'Invalid telephone'
     },
 
-    shopping: [
+    purchases: [
         {
           type: Schema.Types.ObjectId,
           ref: 'Sale'
