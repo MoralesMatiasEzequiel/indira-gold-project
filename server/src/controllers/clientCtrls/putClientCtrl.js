@@ -20,12 +20,14 @@ const putClientCtrl = async (_id, name, lastname, email, phone, purchases) => {
         update.phone = phone;
     }
 
-    if (purchases !== null && purchases !== false) {
-        update.purchases = purchases;
+    // Verifica si `purchases` no es null o false y tiene al menos un ID
+    if (purchases && purchases.length > 0) {
+        // Usa $push para agregar el ID a purchases sin sobrescribir el array existente
+        update.$push = { purchases: { $each: purchases } };
     }
 
-    // const updated = await Client.findOneAndUpdate({ _id }, { $set: { active } }, { new: true });
-    const updated = await Client.updateOne({_id}, {$set: {name, lastname, email, phone, purchases}});
+    // Actualiza el cliente en la base de datos
+    const updated = await Client.updateOne({ _id }, update, { new: true });
 
     return updated;
 };
