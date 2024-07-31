@@ -1,7 +1,7 @@
 require('../../db.js');
 const Client = require('../../collections/Client.js');
 
-const putClientCtrl = async (_id, name, lastname, email, phone, paymentMethod, sale) => {
+const putClientCtrl = async (_id, name, lastname, email, phone, purchases) => {
     const update = {};
 
     if (name !== null && name !== false) {
@@ -20,16 +20,14 @@ const putClientCtrl = async (_id, name, lastname, email, phone, paymentMethod, s
         update.phone = phone;
     }
 
-    if (paymentMethod !== null && paymentMethod !== false) {
-        update.paymentMethod = paymentMethod;
+    // Verifica si `purchases` no es null o false y tiene al menos un ID
+    if (purchases && purchases.length > 0) {
+        // Usa $push para agregar el ID a purchases sin sobrescribir el array existente
+        update.$push = { purchases: { $each: purchases } };
     }
 
-    if (sale !== null && sale !== false) {
-        update.sale = sale;
-    }
-
-    // const updated = await Client.findOneAndUpdate({ _id }, { $set: { active } }, { new: true });
-    const updated = await Client.updateOne({_id}, {$set: {name, lastname, email, phone, paymentMethod, sale}});
+    // Actualiza el cliente en la base de datos
+    const updated = await Client.updateOne({ _id }, update, { new: true });
 
     return updated;
 };
