@@ -8,7 +8,7 @@ const getClientByLastnameCtrl = async (lastname) => {
   if (lastname) {
     const clients = await Client.find({ lastname: regex })
     .populate({
-        path: 'shopping'
+        path: 'purchases'
     });
     return clients;
   };
