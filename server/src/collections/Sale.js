@@ -21,6 +21,10 @@ const saleSchema = new Schema({
         enum: paymentMethodEnum,
         required: true
     },
+    installments: {
+        type: Number,
+        default: 1
+    },
     soldAt: {
         type: String,
         enum: saldAtEnum,
