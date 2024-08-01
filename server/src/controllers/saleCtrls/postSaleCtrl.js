@@ -2,7 +2,7 @@ require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 const Product = require('../../collections/Product.js');
 
-const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client, paymentFee) => {
+const postSaleCtrl = async (paymentMethod, installments, soldAt, discount, products, client, paymentFee) => {
     // Extraigo los IDs de producto únicos de `products`
     const uniqueProductIds = [...new Set(products.map(p => p.productId))];
 
@@ -33,6 +33,7 @@ const postSaleCtrl = async (paymentMethod, soldAt, discount, products, client, p
 
     const newSale = {
         paymentMethod,
+        installments,
         soldAt,
         discount,
         products,
