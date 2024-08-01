@@ -1,6 +1,14 @@
 const { Schema, model } = require('mongoose');
 
 const clientSchema = new Schema({
+
+    dni: {
+        type: String,
+        require: true,
+        unique: true,
+        message: 'Invalid DNI'
+    },
+
     name: {
         type: String,
         require: true,

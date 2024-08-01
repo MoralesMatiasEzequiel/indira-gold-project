@@ -1,8 +1,12 @@
 require('../../db.js');
 const Client = require('../../collections/Client.js');
 
-const putClientCtrl = async (_id, name, lastname, email, phone, purchases) => {
+const putClientCtrl = async (_id, dni, name, lastname, email, phone, purchases) => {
     const update = {};
+
+    if (dni !== null && dni !== false) {
+        update.dni = dni;
+    }
 
     if (name !== null && name !== false) {
         update.name = name;
