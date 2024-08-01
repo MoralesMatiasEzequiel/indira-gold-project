@@ -1,4 +1,5 @@
 const getClientsHandler = require('./getClientsHandler.js');
+const getClientByDniHandler = require('./getClientByDniHandler.js');
 const getClientByNameHandler = require('./getClientByNameHandler.js');
 const getClientByLastnameHandler = require('./getClientByLastnameHandler.js');
 const getClientByEmailHandler = require('./getClientByEmailHandler.js');
@@ -11,6 +12,7 @@ const deleteClientHandler = require('./deleteClientHandler.js');
 
 module.exports = {
     getClientsHandler,
+    getClientByDniHandler,
     getClientByNameHandler,
     getClientByLastnameHandler,
     getClientByEmailHandler,
