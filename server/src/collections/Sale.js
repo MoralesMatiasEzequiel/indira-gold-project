@@ -50,6 +50,10 @@ const saleSchema = new Schema({
             sizeId: {
                 type: Schema.Types.ObjectId,
                 required: true
+            },
+            category: {
+                type: String,
+                required: true
             }
         }
     ],
