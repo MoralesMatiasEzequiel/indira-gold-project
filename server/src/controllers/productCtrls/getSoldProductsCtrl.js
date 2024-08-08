@@ -1,46 +1,34 @@
 require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 
-const getSoldProductCtrl = async () => {
-    try {
-        const sales = await Sale.find()
-        .populate({
-            path: 'products',
-            // populate: {
-            //     path: 'category',
-            // }
-        });
+const getSoldProductCtrl = async (req, res) => {
+  try {
+    // Encuentra todas las ventas activas
+    const sales = await Sale.find({ active: true }).select('products');
 
-        // Objeto para almacenar productos por categoría
-        const productsByCategory = {};
+    // Extrae y cuenta las categorías
+    const categoryCounts = sales.reduce((acc, sale) => {
+      sale.products.forEach(product => {
+        if (product.category) {
+          acc[product.category] = (acc[product.category] || 0) + 1;
+        } else {
+          console.warn('Categoría no encontrada en producto:', product);
+        }
+      });
+      return acc;
+    }, {});
 
-        // Iterar sobre cada venta
-        sales.forEach(sale => {
-            // Iterar sobre cada producto vendido en la venta
-            sale.products.forEach(product => {
-                // Obtener la categoría del producto
-                const category = product.category[0]; 
+    // Convierte el objeto de conteos en un array y ordenado por cantidad descendente
+    const topCategories = Object.entries(categoryCounts)
+      .map(([categoryName, count]) => ({ categoryName, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
 
-                // Inicializar la categoría si aún no existe en el objeto
-                if (!productsByCategory[category]) {
-                    productsByCategory[category] = {
-                        categoryName: product.category[0].name,
-                        soldProducts: []
-                    };
-                }
-
-                // Agregar el producto vendido al array correspondiente
-                productsByCategory[category].soldProducts.push(product);
-            });
-        });
-
-        // Convertir el objeto en un array de objetos y devolverlo
-        const resultArray = Object.values(productsByCategory);
-
-        return resultArray;
-    } catch (error) {
-        res.status(500).send({ error: error.message});
-    }
+    return topCategories;
+    
+  } catch (error) {
+    console.error('Error al obtener las categorías de productos vendidos:', error);;
+  }
 };
 
 module.exports = getSoldProductCtrl;
