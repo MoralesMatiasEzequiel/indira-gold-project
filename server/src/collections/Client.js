@@ -47,7 +47,7 @@ const clientSchema = new Schema({
             sizeId: {
                 type: Schema.Types.ObjectId,
                 required: true
-            }
+            },
         }
     ],
 

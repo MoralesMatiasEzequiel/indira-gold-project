@@ -6,9 +6,9 @@ const getSoldProductCtrl = async () => {
         const sales = await Sale.find()
         .populate({
             path: 'products',
-            populate: {
-                path: 'category',
-            }
+            // populate: {
+            //     path: 'category',
+            // }
         });
 
         // Objeto para almacenar productos por categoría

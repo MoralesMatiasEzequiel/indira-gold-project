@@ -9,9 +9,9 @@ const getActiveSalesCtrl = async () => {
     })
     .populate({
         path: 'products',
-        populate: {
-            path: 'category',
-        }
+        // populate: {
+        //     path: 'category',    
+        // }
     });
 
     return activeSales;
