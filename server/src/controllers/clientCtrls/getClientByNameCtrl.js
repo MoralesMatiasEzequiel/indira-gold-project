@@ -3,16 +3,24 @@ const Client = require('../../collections/Client.js');
 
 const getClientByNameCtrl = async (name) => {
 
-  const regex = new RegExp(`.*${name}.*`, 'i');
+  const normalize = (str) => {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
 
-  if (name) {
-    const clients = await Client.find({ name: regex })
-    .populate({
-        path: 'purchases'
+  if(name){
+    const normalizedName = normalize(name);
+    const regex = new RegExp(`.*${normalizedName}.*`, 'i');
+  
+    const clients = await Client.find().populate({
+      path: 'purchases'
     });
-    return clients;
-  };
 
+    const filteredClients = clients.filter(client => normalize(client.name).match(regex));
+  
+    return filteredClients;
+  }
+
+  
 };
 
 module.exports = getClientByNameCtrl;    

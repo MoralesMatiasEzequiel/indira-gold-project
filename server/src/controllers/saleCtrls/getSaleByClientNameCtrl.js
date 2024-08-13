@@ -4,18 +4,21 @@ const Client = require('../../collections/Client.js');
 
 const getSaleByClientNameCtrl = async (clientName) => {
 
-    const regex = new RegExp(clientName, 'i');
-    
-    if (clientName) {
-        const clients = await Client.find({
-            $or: [
-                { name: regex },
-                { lastname: regex }
-            ]
-        });
+    const normalize = (str) => {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    };
 
-        //Obtengo los IDs de los clientes encontrados:
-        const clientIds = clients.map(client => client._id);
+    if (clientName) {
+        const normalizedClientName = normalize(clientName);
+        const regex = new RegExp(`.*${normalizedClientName}.*`, 'i'); // El 'i' se agrega aquí para insensibilidad a mayúsculas y minúsculas
+
+        const clients = await Client.find().populate({
+            path: 'purchases'
+          });
+         
+        const filteredClients = clients.filter(client => normalize(client.name).match(regex));
+
+        const clientIds = filteredClients.map(client => client._id);
 
         const sales = await Sale.find({
             client: { $in: clientIds },
@@ -23,6 +26,7 @@ const getSaleByClientNameCtrl = async (clientName) => {
         })
         .populate('client')
         .populate('products');
+        
         return sales;
     }
 }
