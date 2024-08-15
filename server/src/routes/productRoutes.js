@@ -28,7 +28,10 @@ productRouter.post('/', upload.fields([
     {name: 'imageGlobal'}
 ]), postProductHandler);   //'upload.array('images', 10)' De esta manera este middleware procesa la subida de hasta 10 archivos bajo el campo images. Se puedes ajustar este número. Creo que 'upload.fields([{ name: 'images', maxCount: 10 }])' hace lo mismo.
 
-productRouter.put('/', putProductHandler);
+productRouter.put('/', upload.fields([
+    {name: 'images'},
+    {name: 'imageGlobal'}
+]), putProductHandler);
 
 productRouter.put('/reduce', putReduceStockCtrl);
 
