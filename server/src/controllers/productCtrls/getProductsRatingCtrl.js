@@ -29,8 +29,25 @@ const getProductsRatingCtrl = async () => {
         // Mapear los resultados de la agregación con los detalles de los productos
         const topFiveProducts = salesAggregation.map(item => {
             const product = products.find(p => p._id.equals(item._id.productId));
+            
+            if (!product) {
+                console.error(`Producto no encontrado: ${item._id.productId}`);
+                return null;
+            };
+            
             const color = product.color.find(c => c._id.equals(item._id.colorId));
+            
+            if (!color) {
+                console.error(`Color no encontrado: ${item._id.colorId}`);
+                return null;
+            };
+            
             const size = color.size.find(s => s._id.equals(item._id.sizeId));
+            
+            if (!size) {
+                console.error(`Tamaño no encontrado: ${item._id.sizeId}`);
+                return null;
+            };
 
             return {
                 productName: product.name,
@@ -38,7 +55,7 @@ const getProductsRatingCtrl = async () => {
                 sizeName: size.sizeName,
                 count: item.count
             };
-        });
+        }).filter(result => result !== null); // Filtra los elementos nulos
 
         return { topFiveProducts };
     } catch (error) {

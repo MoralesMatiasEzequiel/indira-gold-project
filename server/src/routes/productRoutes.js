@@ -2,7 +2,20 @@ const productRouter = require('express').Router();
 const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getProductByNameHandler, getSoldProductsHandler, getProductsRatingHandler, getProductColorsHandler, postProductHandler, putProductHandler, putReduceStockCtrl, putProductStatusHandler, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
 const upload = require('../config/uploadConfig.js');
 
-productRouter.get('/', async (req, res) => {
+productRouter.get('/', getProductsHandler);
+
+// productRouter.get('/', async (req, res) => {
+    
+//     const { name } = req.query;
+
+//     if (name) {
+//         return getProductByNameHandler(req, res);
+//     }
+
+//     return getProductsHandler(req, res); 
+// });
+
+productRouter.get('/all', async (req, res) => {
     
     const { name } = req.query;
 
@@ -10,10 +23,10 @@ productRouter.get('/', async (req, res) => {
         return getProductByNameHandler(req, res);
     }
 
-    return getProductsHandler(req, res); 
+    return getProductsAllHandler(req, res); 
 });
 
-productRouter.get('/all', getProductsAllHandler);
+// productRouter.get('/all', getProductsAllHandler);
 
 productRouter.get('/sold', getSoldProductsHandler);
 
