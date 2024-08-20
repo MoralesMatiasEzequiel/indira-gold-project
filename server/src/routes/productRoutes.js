@@ -1,5 +1,5 @@
 const productRouter = require('express').Router();
-const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getProductByNameHandler, getSoldProductsHandler, getProductsRatingHandler, getProductColorsHandler, postProductHandler, putProductHandler, putReduceStockCtrl, putProductStatusHandler, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
+const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getProductByNameHandler, getSoldProductsHandler, getProductsRatingHandler, getProductColorsHandler, postProductHandler, putProductHandler, putReduceStockHandler, putIncreaseStockHandler, putProductStatusHandler, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
 const upload = require('../config/uploadConfig.js');
 
 productRouter.get('/', getProductsHandler);
@@ -46,7 +46,9 @@ productRouter.put('/', upload.fields([
     {name: 'imageGlobal'}
 ]), putProductHandler);
 
-productRouter.put('/reduce', putReduceStockCtrl);
+productRouter.put('/reduce', putReduceStockHandler);
+
+productRouter.put('/increase', putIncreaseStockHandler);
 
 productRouter.put('/:id', putProductStatusHandler);
 

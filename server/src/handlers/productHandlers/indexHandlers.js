@@ -7,7 +7,8 @@ const getProductsRatingHandler = require('./getProductsRatingHandler.js');
 const getProductColorsHandler = require('./getProductColorsHandler.js');
 const postProductHandler = require('./postProductHandler.js');
 const putProductHandler = require('./putProductHandler.js');
-const putReduceStockCtrl = require('./putReduceStockHandler.js');
+const putReduceStockHandler = require('./putReduceStockHandler.js');
+const putIncreaseStockHandler = require('./putIncreaseStockHandler.js');
 const putProductStatusHandler = require('./putProductStatusHandler.js')
 const deleteProductHandler = require('./deleteProductHandler.js');
 
@@ -22,7 +23,8 @@ module.exports = {
     getProductColorsHandler,
     postProductHandler,
     putProductHandler,
-    putReduceStockCtrl,
+    putReduceStockHandler,
+    putIncreaseStockHandler,
     putProductStatusHandler,
     deleteProductHandler
 }
