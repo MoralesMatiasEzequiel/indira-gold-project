@@ -36,7 +36,7 @@ const clientSchema = new Schema({
     purchases: [
         {
             productId: {
-                type: Schema.Types.ObjectId,
+                type: String,
                 ref: 'Product',
                 required: true
             },
