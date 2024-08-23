@@ -9,6 +9,7 @@ const postProductHandler = require('./postProductHandler.js');
 const putProductHandler = require('./putProductHandler.js');
 const putReduceStockHandler = require('./putReduceStockHandler.js');
 const putIncreaseStockHandler = require('./putIncreaseStockHandler.js');
+const putIncreasePriceHandler = require('./putIncreasePriceHandler.js');
 const putProductStatusHandler = require('./putProductStatusHandler.js')
 const deleteProductHandler = require('./deleteProductHandler.js');
 
@@ -25,6 +26,7 @@ module.exports = {
     putProductHandler,
     putReduceStockHandler,
     putIncreaseStockHandler,
+    putIncreasePriceHandler,
     putProductStatusHandler,
     deleteProductHandler
 }
