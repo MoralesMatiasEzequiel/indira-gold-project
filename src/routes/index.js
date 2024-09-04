@@ -7,6 +7,7 @@ const categoryRoutes = require('./categoryRoutes.js');
 
 const router = Router();
 
+router.use('/', (req, res) => {res.send('Server Indira Gold OK')});
 router.use('/products', productRouter);
 router.use('/sale', saleRoutes);
 router.use('/clients', clientRoutes);
