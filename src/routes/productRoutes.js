@@ -52,7 +52,9 @@ productRouter.put('/increase', putIncreaseStockHandler);
 
 productRouter.put('/increasePrice', putIncreasePriceHandler);
 
-productRouter.put('/deactive/:id', putProductStatusHandler);
+productRouter.put('/:id', putProductStatusHandler);
+
+// productRouter.put('/deactive/:id', putProductStatusHandler);
 
 productRouter.delete('/:id', deleteProductHandler);
 

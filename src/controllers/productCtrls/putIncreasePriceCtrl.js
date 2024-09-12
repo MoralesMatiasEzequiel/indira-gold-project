@@ -1,6 +1,6 @@
 const Product = require('../../collections/Product.js');
 
-const putIncreasePriceCtrl = async (porcentage, products, category) => {
+const putIncreasePriceCtrl = async (adjust, porcentage, products, category) => {
     try {
         let productsDB;
 
@@ -20,16 +20,28 @@ const putIncreasePriceCtrl = async (porcentage, products, category) => {
         } else {
             // Si no se especifica categoría ni productos, obtener todos los productos activos
             productsDB = await Product.find({ active: true });
-        }
+        };
 
-        // Aumentar el precio en el porcentaje especificado
+        if(adjust && adjust === 'increase'){
+            // Aumentar el precio en el porcentaje especificado
         const updatedProducts = await Promise.all(productsDB.map(async (product) => {
             product.price = product.price + (product.price * (porcentage / 100));
             await product.save(); // Guardar los cambios en la base de datos
             return product;
         }));
+            return updatedProducts;
+        };
 
-        return updatedProducts;
+        if (adjust && adjust === 'decrease') {
+            // Mermar el precio en el porcentaje especificado
+            const updatedProducts = await Promise.all(productsDB.map(async (product) => {
+                product.price = product.price - (product.price * (porcentage / 100));
+                await product.save(); // Guardar los cambios en la base de datos
+                return product;
+            }));
+            return updatedProducts;
+        };
+        
     } catch (error) {
         console.error('Error updating product prices:', error);
         throw new Error('Failed to update product prices.');
