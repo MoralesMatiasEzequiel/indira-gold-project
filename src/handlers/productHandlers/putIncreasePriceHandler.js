@@ -2,7 +2,7 @@ const putIncreasePriceCtrl = require('../../controllers/productCtrls/putIncrease
 
 const putIncreasePriceHandler = async (req, res) => {
     try {
-        const { porcentage, products, category } = req.body;
+        const { adjust, porcentage, products, category } = req.body;
 
         if (porcentage && typeof Number(porcentage) !== 'number') {
             return res.status(400).send({ error: 'Incorrect DataType porcentage' });
@@ -12,6 +12,7 @@ const putIncreasePriceHandler = async (req, res) => {
         // };
 
         const productsPriceUpdate = await putIncreasePriceCtrl( 
+            adjust, 
             Number(porcentage), 
             products,
             category
