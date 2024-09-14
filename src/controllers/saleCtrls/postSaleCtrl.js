@@ -1,19 +1,12 @@
 require('../../db.js');
 const Sale = require('../../collections/Sale.js');
-const Product = require('../../collections/Product.js');
 
 const postSaleCtrl = async (paymentMethod, installments, soldAt, discount, products, client, paymentFee) => {
-    // Extraigo los IDs de producto únicos de `products`
-    const uniqueProductIds = [...new Set(products.map(p => p.productId))];
 
-    // Obtengo los productos desde la base de datos usando sus IDs únicos
-    const productsFromDB = await Product.find({ '_id': { $in: uniqueProductIds } });
-
-    // Calculo el precio total sumando los precios de los productos considerando las repeticiones
     const subTotal = products.reduce((total, product) => {
-        const productFromDB = productsFromDB.find(p => p._id.toString() === product.productId.toString());
-        return total + (productFromDB ? productFromDB.price : 0);
+        return total + (product.price || 0); // Asegúrate de que cada producto tenga una propiedad price
     }, 0);
+
 
     let totalPrice = subTotal;
     let discountApplied = 0;
