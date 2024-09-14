@@ -32,7 +32,8 @@ const postSalesHandler = async (req, res) => {
       if (
         typeof product.productId !== 'string' ||
         typeof product.colorId !== 'string' ||
-        typeof product.sizeId !== 'string'
+        typeof product.sizeId !== 'string' ||
+        typeof product.price !== 'number'
       ) {
         return res.status(400).send({ error: 'Incorrect DataType in products array' });
       }
