@@ -51,6 +51,10 @@ const saleSchema = new Schema({
                 type: Schema.Types.ObjectId,
                 required: true
             },
+            price: {
+                type: Number,
+                required: [true, 'Invalid price']
+            },
             category: {
                 type: String,
                 required: true
