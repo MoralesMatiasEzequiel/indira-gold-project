@@ -1,6 +1,14 @@
 const Client = require('../../collections/Client.js');
 
 const postClientCtrl = async (dni, name, lastname, email, phone) => {
+
+    const clientFound = await Client.findOne({ dni });
+
+    if (clientFound) {
+        
+        throw new Error('Ya existe un cliente registrado con este DNI');
+    }
+
     const newClient = {
         dni,
         name,
