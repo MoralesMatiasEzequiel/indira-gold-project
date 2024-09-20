@@ -1,19 +1,50 @@
 require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 
-const putSaleCtrl = async (_id, products, discount, paymentFee) => {
+const putSaleCtrl = async (_id, products, discount, paymentFee, subtotal) => {
 
-    const subTotal = products.reduce((total, product) => {
+    let newSubTotal = 0;
+
+    // Obtener la venta existente para acceder a los productos anteriores
+    const existingSale = await Sale.findById(_id);
+    if (!existingSale) {
+        throw new Error('Sale not found');
+    }
+
+    // Mapear productos anteriores para un fácil acceso
+    const previousProducts = existingSale.products.reduce((acc, product) => {
+        acc[product.productId] = product.price;
+        return acc;
+    }, {});
+
+    // Ajustar precios de los productos nuevos basados en los anteriores
+    const adjustedProducts = products.map(product => {
+        if (previousProducts[product.productId]) {
+            return {
+                ...product,
+                price: previousProducts[product.productId]
+            };
+        }
+        return product; // Si no hay coincidencia, mantenemos el precio original
+    });
+
+    let subTotalFromProducts = products.reduce((total, product) => {
         return total + (product.price || 0); // Asegúrate de que cada producto tenga una propiedad price
     }, 0);
 
+    if(subtotal) {
+        newSubTotal = subtotal;
+        products = adjustedProducts;
+    } else {
+        newSubTotal = subTotalFromProducts;
+    }
 
-    let totalPrice = subTotal;
+    let totalPrice = newSubTotal;
     let discountApplied = 0;
 
     if (discount) {
-        discountApplied = (subTotal * discount) / 100;
-        totalPrice = subTotal - discountApplied;
+        discountApplied = (newSubTotal * discount) / 100;
+        totalPrice = newSubTotal - discountApplied;
     }
 
     let totalWithFee = totalPrice;
@@ -30,7 +61,7 @@ const putSaleCtrl = async (_id, products, discount, paymentFee) => {
             $set: {
                 products,
                 discount,
-                subTotal,
+                subTotal: newSubTotal,
                 discountApplied,
                 totalPrice,
                 paymentFee,
