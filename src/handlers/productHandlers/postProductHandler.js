@@ -6,7 +6,7 @@ const postProductHandler = async (req, res) => {
     try {
         if (!name || !color || !price || !category) {
             return res.status(400).send({ error: 'Missing data' });
-        }
+        };
 
         // Procesar las imágenes subidas
         const imagePaths = req.files['images'] ? req.files['images'].map(file => file.path) : [];
