@@ -1,19 +1,17 @@
 const productRouter = require('express').Router();
-const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getProductByNameHandler, getSoldProductsHandler, getProductsRatingHandler, getProductColorsHandler, postProductHandler, putProductHandler, putReduceStockHandler, putIncreaseStockHandler, putIncreasePriceHandler, putProductStatusHandler, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
+const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getActiveProductsByNameHandler, getProductByNameHandler, getSoldProductsHandler, getProductsRatingHandler, getProductColorsHandler, postProductHandler, putProductHandler, putReduceStockHandler, putIncreaseStockHandler, putIncreasePriceHandler, putProductStatusHandler, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
 const upload = require('../config/uploadConfig.js');
 
-productRouter.get('/', getProductsHandler);
-
-// productRouter.get('/', async (req, res) => {
+productRouter.get('/', async (req, res) => {
     
-//     const { name } = req.query;
+    const { name } = req.query;
 
-//     if (name) {
-//         return getProductByNameHandler(req, res);
-//     }
+    if (name) {
+       return getActiveProductsByNameHandler(req, res);
+     }
 
-//     return getProductsHandler(req, res); 
-// });
+     return getProductsHandler(req, res); 
+});
 
 productRouter.get('/all', async (req, res) => {
     
