@@ -10,6 +10,7 @@ const getMonthlySalesByClientHandler = require('./getMonthlySalesByClientHandler
 const postSaleHandlers = require('./postSaleHandlers.js');
 const putSaleHandler = require('./putSaleHandler.js');
 const putSaleStatusHandler = require('./putSaleStatusHandler.js');
+const deleteSaleHandler = require('./deleteSaleHandler.js');
 
 
 
@@ -25,5 +26,6 @@ module.exports = {
     getMonthlySalesByClientHandler,
     postSaleHandlers,
     putSaleHandler,
-    putSaleStatusHandler
+    putSaleStatusHandler,
+    deleteSaleHandler
 };
