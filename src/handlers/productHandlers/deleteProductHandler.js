@@ -1,4 +1,4 @@
-const deleteProductCtrl = require('../../controllers/productCtrls/deleteProductCtrl.js')
+const deleteProductCtrl = require('../../controllers/productCtrls/deleteProductCtrl.js');
 
 const deleteProductHandler = async (req, res) => {
     const { id } = req.params;
