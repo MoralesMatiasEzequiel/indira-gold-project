@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 const Product = require('../../collections/Product.js');
