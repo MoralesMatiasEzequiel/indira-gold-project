@@ -1,6 +1,6 @@
 const Product = require('../../collections/Product.js');
 
-const postProductCtrl = async (name, color, supplier, price, category, description, imageGlobalPath) => {
+const postProductCtrl = async (name, color, supplier, price, category, description, imageGlobal) => {
     
   const newProduct = {
         name,
@@ -9,7 +9,7 @@ const postProductCtrl = async (name, color, supplier, price, category, descripti
         price,
         category,
         description,
-        imageGlobal: imageGlobalPath || null
+        imageGlobal: imageGlobal || null
   };
   
   const createdProduct = await Product.create(newProduct);

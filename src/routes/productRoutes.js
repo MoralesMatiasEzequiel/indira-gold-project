@@ -1,6 +1,6 @@
 const productRouter = require('express').Router();
 const { getProductsHandler, getProductsAllHandler, getProductByIdHandler, getActiveProductsByNameHandler, getProductByNameHandler, getSoldProductsHandler, getProductsRatingHandler, getProductColorsHandler, postProductHandler, putProductHandler, putReduceStockHandler, putIncreaseStockHandler, putIncreasePriceHandler, putProductStatusHandler, deleteProductHandler } = require('../handlers/productHandlers/indexHandlers.js');
-const upload = require('../config/uploadConfig.js');
+//const upload = require('../config/uploadConfig.js');
 
 productRouter.get('/', async (req, res) => {
     
@@ -34,15 +34,19 @@ productRouter.get('/colors', getProductColorsHandler);
 
 productRouter.get('/:id', getProductByIdHandler);
 
-productRouter.post('/', upload.fields([
-    {name: 'images'},
-    {name: 'imageGlobal'}
-]), postProductHandler);   //'upload.array('images', 10)' De esta manera este middleware procesa la subida de hasta 10 archivos bajo el campo images. Se puedes ajustar este número. Creo que 'upload.fields([{ name: 'images', maxCount: 10 }])' hace lo mismo.
+productRouter.post('/', postProductHandler);
 
-productRouter.put('/', upload.fields([
-    {name: 'images'},
-    {name: 'imageGlobal'}
-]), putProductHandler);
+// productRouter.post('/', upload.fields([
+//     {name: 'images'},
+//     {name: 'imageGlobal'}
+// ]), postProductHandler);   //'upload.array('images', 10)' De esta manera este middleware procesa la subida de hasta 10 archivos bajo el campo images. Se puedes ajustar este número. Creo que 'upload.fields([{ name: 'images', maxCount: 10 }])' hace lo mismo.
+
+productRouter.put('/', putProductHandler);
+
+// productRouter.put('/', upload.fields([
+//     {name: 'images'},
+//     {name: 'imageGlobal'}
+// ]), putProductHandler);
 
 productRouter.put('/reduce', putReduceStockHandler);
 

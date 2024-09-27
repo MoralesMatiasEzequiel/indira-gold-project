@@ -1,12 +1,12 @@
 const Product = require('../../collections/Product.js');
 
-const putProductCtrl = async (_id, name, parsedColor, supplier, price, category, description, active, imageGlobalPath) => {
+const putProductCtrl = async (_id, name, color, supplier, price, category, description, active, imageGlobal) => {
     
     const updateFields = {
         name,
-        color: parsedColor,
+        color,
         supplier,
-        imageGlobal: imageGlobalPath || null,
+        imageGlobal: imageGlobal || null,
         price,
         category,
         description,
