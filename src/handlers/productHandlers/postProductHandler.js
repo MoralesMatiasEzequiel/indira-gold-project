@@ -1,7 +1,7 @@
 const postProductCtrl = require('../../controllers/productCtrls/postProductCtrl.js');
 
 const postProductHandler = async (req, res) => {
-    const { name, color, supplier, price, category, description } = req.body;
+    const { name, color, supplier, price, category, description, imageGlobal } = req.body;
 
     try {
         if (!name || !color || !price || !category) {
@@ -9,15 +9,15 @@ const postProductHandler = async (req, res) => {
         };
 
         // Procesar las imágenes subidas
-        const imagePaths = req.files['images'] ? req.files['images'].map(file => file.path) : [];
-        const imageGlobalPath = req.files['imageGlobal'] ? req.files['imageGlobal'][0].path : null;
+        // const imagePaths = req.files['images'] ? req.files['images'].map(file => file.path) : [];
+        // const imageGlobalPath = req.files['imageGlobal'] ? req.files['imageGlobal'][0].path : null;
 
-        const parsedColor = JSON.parse(color);
-        parsedColor.forEach((c, index) => {
-            if (imagePaths[index]) {
-                c.image = imagePaths[index];
-            }
-        });
+        // const parsedColor = JSON.parse(color);
+        // parsedColor.forEach((c, index) => {
+        //     if (imagePaths[index]) {
+        //         c.image = imagePaths[index];
+        //     }
+        // });
 
         //Este código es para verificar si ya existe el producto creado:
         // let existingProduct = await Product.findOne({ name, active: false });
@@ -30,7 +30,8 @@ const postProductHandler = async (req, res) => {
         //   return res.status(200).send(`The product ${existingProduct.name} has been reactivated and updated`);
         // }
         
-        const newProduct = await postProductCtrl(name, parsedColor, JSON.parse(supplier), price, JSON.parse(category), description, imageGlobalPath);
+        //const newProduct = await postProductCtrl(name, parsedColor, JSON.parse(supplier), price, JSON.parse(category), description, imageGlobalPath);
+        const newProduct = await postProductCtrl(name, color, supplier, price, category, description, imageGlobal);
         res.status(200).send(newProduct);
 
     } catch (error) {
