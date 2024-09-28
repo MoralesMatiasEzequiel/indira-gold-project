@@ -1,6 +1,6 @@
 const Product = require('../../collections/Product.js');
 
-const putProductCtrl = async (_id, name, color, supplier, price, category, description, active, imageGlobal) => {
+const putProductCtrl = async (_id, name, color, supplier, price, salePrice, category, description, active, imageGlobal) => {
     
     const updateFields = {
         name,
@@ -8,6 +8,7 @@ const putProductCtrl = async (_id, name, color, supplier, price, category, descr
         supplier,
         imageGlobal: imageGlobal || null,
         price,
+        salePrice,
         category,
         description,
         active

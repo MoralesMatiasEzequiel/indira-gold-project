@@ -3,7 +3,7 @@ const putProductCtrl = require('../../controllers/productCtrls/putProductCtrl.js
 const putProductHandler = async (req, res) => {
     // console.log('Incoming files:', req.files);
     // console.log('req.files:', req.files);
-    const { _id, name, color, supplier, price, description, category, active, imageGlobal } = req.body;
+    const { _id, name, color, supplier, price, salePrice, description, category, active, imageGlobal } = req.body;
 
     try {
         if (!_id) return res.status(400).json({ error: 'Missing ID' });
@@ -42,6 +42,11 @@ const putProductHandler = async (req, res) => {
         if (price && typeof Number(price) !== 'number') {
             return res.status(400).send({ error: 'Incorrect DataType price' });
         }
+
+        if (salePrice && typeof Number(salePrice) !== 'number') {
+            return res.status(400).send({ error: 'Incorrect DataType salePrice' });
+        }
+
         if (description && typeof description !== 'string') {
             return res.status(400).send({ error: 'Incorrect DataType description' });
         }
@@ -97,7 +102,8 @@ const putProductHandler = async (req, res) => {
             name, 
             color, 
             supplier, 
-            price, 
+            price,
+            salePrice,
             category, 
             description, 
             active,
