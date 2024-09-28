@@ -55,6 +55,10 @@ const productSchema = new Schema({
         type: Number,
         required: [true, 'Invalid price']
     },
+    salePrice: {
+        type: Number,
+        default: 0
+    },
     description: {
         type: String
     },
