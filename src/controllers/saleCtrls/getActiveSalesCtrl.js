@@ -2,8 +2,13 @@ require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 
 const getActiveSalesCtrl = async () => {
+    const twoYearsAgo = new Date();
+    twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
 
-    const activeSales = await Sale.find({active: true})
+    const activeSales = await Sale.find({
+        active: true,
+        date: { $gte: twoYearsAgo }  
+    })
     .populate({
         path: 'client'
     })
@@ -12,7 +17,6 @@ const getActiveSalesCtrl = async () => {
     });
 
     return activeSales;
-
-}
+};
 
 module.exports = getActiveSalesCtrl;
