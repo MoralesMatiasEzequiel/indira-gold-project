@@ -2,7 +2,10 @@ require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 
 const getSalesCtrl = async () => {
-    const sales = await Sale.find()
+    const twoYearsAgo = new Date();
+    twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
+
+    const sales = await Sale.find({ date: { $gte: twoYearsAgo } })
         .populate({
             path: 'client'
         })
@@ -12,7 +15,6 @@ const getSalesCtrl = async () => {
                 path: 'category',
             }
         });
-
 
     return sales;
 };
