@@ -6,6 +6,7 @@ const getProductsRatingCtrl = async () => {
     try {
         // Obtener los productos más vendidos utilizando una agregación
         const salesAggregation = await Sale.aggregate([
+            { $match: { active: true } }, // Filtrar por ventas activas
             { $unwind: "$products" },
             {
                 $group: {
