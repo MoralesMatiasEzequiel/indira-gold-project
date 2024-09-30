@@ -1,7 +1,6 @@
 const categoryRouter = require('express').Router();
 const { getCategoriesHandler, getActiveCategoriesHandler, postCategoryHandler, putCategoryHandler, putCategoryStatusHandler, deleteCategoryHandler, } = require('../handlers/categoryHandlers/indexHandlers.js');
 
-
 categoryRouter.get('/', getCategoriesHandler);
 
 categoryRouter.get('/onlyActives', getActiveCategoriesHandler);

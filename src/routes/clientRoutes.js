@@ -31,5 +31,4 @@ clientRouter.put('/:id', putClientStatusHandler);
 
 clientRouter.delete('/:id', deleteClientHandler);
 
-
 module.exports = clientRouter;

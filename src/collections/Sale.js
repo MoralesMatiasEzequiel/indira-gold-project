@@ -96,7 +96,6 @@ const saleSchema = new Schema({
     }
 });
 
-// Middleware para ajustar la fecha antes de guardar
 saleSchema.pre('save', function(next) {
     if (!this.date) {
         const now = new Date();
@@ -106,7 +105,6 @@ saleSchema.pre('save', function(next) {
     next();
 });
 
-// Middleware para generar un número de orden único antes de guardar
 saleSchema.pre('save', async function(next) {
     if (!this.orderNumber) {
         try {

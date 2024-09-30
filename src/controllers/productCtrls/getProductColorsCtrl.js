@@ -3,10 +3,8 @@ const Product = require('../../collections/Product.js');
 
 const getProductColorsCtrl = async () => {
 
-    // Se consulta solo los campos necesarios, en este caso el de 'color.colorName'
     const products = await Product.find({}, 'color.colorName');
 
-    // Usamos un Set para nombres de colores únicos
     const colorNamesSet = new Set();
 
     products.forEach(product => {
@@ -15,7 +13,6 @@ const getProductColorsCtrl = async () => {
         });
     });
 
-    // Se convierte el Set en un Array
     const colorNamesArray = Array.from(colorNamesSet);
 
     return colorNamesArray;

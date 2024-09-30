@@ -12,10 +12,7 @@ const sizeSchema = new Schema({
         required: true
     },
     measurements: [measurementSchema],
-    // code: {
-    //     type: String,
-    //     required: true
-    // },
+    
     stock: {
         type: Number,
         required: true

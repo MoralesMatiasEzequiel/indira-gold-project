@@ -4,7 +4,7 @@ const getSalesLocalHandlers = async (req, res) => {
 
     try {
         const salesLocal = await getSalesOnlineCtrl();
-// console.log(salesLocal);
+        
         res.status(200).send(salesLocal);
 
     } catch (error) {

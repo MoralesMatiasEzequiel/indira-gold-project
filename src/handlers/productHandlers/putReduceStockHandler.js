@@ -9,7 +9,6 @@ const putReduceStockHandler = async (req, res) => {
 
     const productUpdate = await putReduceStockCtrl(_id, idColor, idSize, stockToReduce);
     
-    // Verifica si la actualización fue exitosa
     if (!productUpdate.success) {
       return res.status(400).json({ error: productUpdate.message });
     }

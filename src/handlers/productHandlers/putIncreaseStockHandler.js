@@ -6,10 +6,8 @@ const putIncreaseStockHandler = async (req, res) => {
     if (!_id) {
       return res.status(400).json({ error: 'Missing ID' });
     }
-
     const productUpdate = await putIncreaseStockCtrl(_id, idColor, idSize, stockToIncrease);
     
-    // Verifica si la actualización fue exitosa
     if (!productUpdate.success) {
       return res.status(400).json({ error: productUpdate.message });
     }

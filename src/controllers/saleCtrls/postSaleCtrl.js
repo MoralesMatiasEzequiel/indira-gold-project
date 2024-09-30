@@ -4,7 +4,7 @@ const Sale = require('../../collections/Sale.js');
 const postSaleCtrl = async (paymentMethod, installments, soldAt, discount, products, client, paymentFee) => {
 
     const subTotal = products.reduce((total, product) => {
-        return total + (product.price || 0); // Asegúrate de que cada producto tenga una propiedad price
+        return total + (product.price || 0);
     }, 0);
 
 

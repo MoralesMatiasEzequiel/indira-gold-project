@@ -5,7 +5,7 @@ const getSalesCtrl = async () => {
     const twoYearsAgo = new Date();
     twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
 
-    const sales = await Sale.find({ date: { $gte: twoYearsAgo } }) // Filtra por fecha
+    const sales = await Sale.find({ date: { $gte: twoYearsAgo } })
         .populate({
             path: 'client'
         })

@@ -4,7 +4,7 @@ const Product = require('../../collections/Product.js');
 
 const getProductsRatingCtrl = async () => {
     try {
-        // Obtener los productos más vendidos utilizando una agregación
+
         const salesAggregation = await Sale.aggregate([
             { $match: { active: true } }, // Filtrar por ventas activas
             { $unwind: "$products" },
@@ -22,11 +22,9 @@ const getProductsRatingCtrl = async () => {
             { $limit: 5 }
         ]);
 
-        // Obtener detalles de los productos más vendidos
         const topProductIds = salesAggregation.map(item => item._id.productId);
         const products = await Product.find({ _id: { $in: topProductIds } }).lean();
 
-        // Mapear los resultados de la agregación con los detalles de los productos
         const topFiveProducts = salesAggregation.map(item => {
             const product = products.find(p => p._id.equals(item._id.productId));
             
@@ -55,7 +53,7 @@ const getProductsRatingCtrl = async () => {
                 sizeName: size.sizeName,
                 count: item.count
             };
-        }).filter(result => result !== null); // Filtra los elementos nulos
+        }).filter(result => result !== null);
 
         return { topFiveProducts };
     } catch (error) {

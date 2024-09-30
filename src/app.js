@@ -25,8 +25,4 @@ server.use((req, res, next) => {
 
 server.use('/', routes);
 
-// Configuración para servir archivos estáticos desde la carpeta 'uploads'
-server.use('/uploads', express.static(uploadsDir));
-
-
 module.exports = server;

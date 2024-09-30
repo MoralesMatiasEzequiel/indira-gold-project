@@ -15,7 +15,6 @@ const getClientByLastnameCtrl = async (lastname) => {
         path: 'purchases'
     });
 
-    // Filtra los clientes cuyo apellido normalizado coincide con la búsqueda
     const filteredClients = clients.filter(client => normalize(client.lastname).match(regex));
     
     return filteredClients;
