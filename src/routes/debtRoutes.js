@@ -1,6 +1,7 @@
 const debtRouter = require('express').Router();
-const { getDebtsHandler, postDebtHandler, putDebtHandler, putDebtAmountHandler } = require('../handlers/debtHandlers/indexHandlers.js');
+const { getDebtsHandler, getDebtByIdHandler, postDebtHandler, putDebtHandler, putDebtAmountHandler } = require('../handlers/debtHandlers/indexHandlers.js');
 
+debtRouter.get('/:id', getDebtByIdHandler);
 debtRouter.get('/', getDebtsHandler);
 debtRouter.post('/', postDebtHandler);
 debtRouter.put('/', putDebtHandler);

@@ -9,7 +9,7 @@ const getSaleByIdCtrl = async (_id) => {
     })
     .populate({
         path: 'products'
-    });;
+    });
     
     return sale;
 }
