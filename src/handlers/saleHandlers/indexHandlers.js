@@ -6,7 +6,9 @@ const getSaleByClientNameHandlers = require('./getSaleByClientNameHandlers.js');
 const getSalesOnlineHandlers = require('./getSalesOnlineHandlers.js');
 const getSalesLocalHandlers = require('./getSalesLocalHandlers.js');
 const getSalesBalanceHandlers = require('./getSalesBalanceHandlers.js');
+const getSalesAnnualBalanceHandler = require('./getSalesAnnualBalanceHandler.js');
 const getMonthlySalesByClientHandler = require('./getMonthlySalesByClientHandler.js');
+const getYearsOfSalesHandler = require('./getYearsOfSalesHandler.js');
 const postSaleHandlers = require('./postSaleHandlers.js');
 const putSaleHandler = require('./putSaleHandler.js');
 const putSaleStatusHandler = require('./putSaleStatusHandler.js');
@@ -23,7 +25,9 @@ module.exports = {
     getSalesOnlineHandlers,
     getSalesLocalHandlers,
     getSalesBalanceHandlers,
+    getSalesAnnualBalanceHandler,
     getMonthlySalesByClientHandler,
+    getYearsOfSalesHandler,
     postSaleHandlers,
     putSaleHandler,
     putSaleStatusHandler,

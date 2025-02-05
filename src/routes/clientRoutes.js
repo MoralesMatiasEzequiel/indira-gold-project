@@ -18,18 +18,11 @@ clientRouter.get('/', (req, res, next) => {
     };
     return getClientsHandler(req, res, next);   
 });
-
 clientRouter.get('/:id', getClientByIdHandler);
-
 clientRouter.post('/', postClientHandler); 
-
 clientRouter.put('/', putClientHandler);
-
 clientRouter.put('/removePurchases', putRemovePurchasesHandler);
-
 clientRouter.put('/:id', putClientStatusHandler);
-
 clientRouter.delete('/:id', deleteClientHandler);
-
 
 module.exports = clientRouter;

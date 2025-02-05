@@ -106,6 +106,15 @@ saleSchema.pre('save', function(next) {
     next();
 });
 
+//RECOMENDACIÖN: forma correcta de trabajar la fecha:
+// saleSchema.pre('save', function(next) {
+//     if (!this.date) {
+//         // Guardar la fecha tal como está, en UTC
+//         this.date = new Date(); // Sin ajustes
+//     }
+//     next();
+// });
+
 // Middleware para generar un número de orden único antes de guardar
 saleSchema.pre('save', async function(next) {
     if (!this.orderNumber) {
