@@ -27,8 +27,9 @@ const postDebtCtrl = async (saleId, amount) => {
         const newDebt = await Debt.create({
             sale: saleId,
             client: clientId,
-            remainingBalance,
             income: [incomeEntry],
+            paymentMade: amount,
+            remainingBalance,
             active: true
         });
 

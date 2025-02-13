@@ -1,8 +1,8 @@
 require('../../db.js');
-const Sale = require('../../collections/Sale.js');
+const Debt = require('../../collections/Debt.js');
 const Client = require('../../collections/Client.js');
 
-const getSaleByClientNameCtrl = async (clientName) => {
+const getDebtByClientNameCtrl = async (clientName) => {
     const normalize = (str) => {
         return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     };
@@ -11,9 +11,7 @@ const getSaleByClientNameCtrl = async (clientName) => {
         const normalizedClientName = normalize(clientName);
         const regex = new RegExp(`.*${normalizedClientName}.*`, 'i'); // Insensible a mayúsculas y minúsculas
 
-        const clients = await Client.find().populate({
-            path: 'purchases'
-        });
+        const clients = await Client.find();
 
         // Filtrar clientes que coincidan con el nombre o el apellido
         const filteredClients = clients.filter(client =>
@@ -22,15 +20,14 @@ const getSaleByClientNameCtrl = async (clientName) => {
 
         const clientIds = filteredClients?.map(client => client._id);
 
-        const sales = await Sale.find({
+        const debts = await Debt.find({
             client: { $in: clientIds },
             active: true
         })
-        .populate('client')
-        .populate('products');
+        .populate('client');
 
-        return sales;
+        return debts;
     }
 }
 
-module.exports = getSaleByClientNameCtrl;
+module.exports = getDebtByClientNameCtrl;

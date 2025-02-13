@@ -30,6 +30,12 @@ const debtSchema = new Schema({
         default: 0,
         required: ['Invalid remaining balance']
     },
+
+    paymentMade: {
+        type: Number,
+        default: 0,
+        required: ['Invalid payment made']
+    },
   
     active: {
       type: Boolean,
