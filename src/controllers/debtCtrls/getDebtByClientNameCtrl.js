@@ -24,7 +24,8 @@ const getDebtByClientNameCtrl = async (clientName) => {
             client: { $in: clientIds },
             active: true
         })
-        .populate('client');
+        .populate('client')
+        .populate('sale');
 
         return debts;
     }
