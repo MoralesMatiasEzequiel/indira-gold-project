@@ -13,10 +13,10 @@ const postDebtHandler = async (req, res) => {
       return res.status(400).send({ error: 'Incorrect DataType - saleId' });
     };
 
-    if (typeof amount !== 'number' || amount <= 0) {
-      return res.status(400).send({ error: 'Incorrect DataType - amount should be a positive number' });
-    };
-
+    if (isNaN(amount)) {
+      return res.status(400).send({ error: 'Incorrect DataType - amount should be a valid number' });
+    }
+  
     const newDebt = await postDebtCtrl(saleId, amount);
 
     res.status(200).send(newDebt);
