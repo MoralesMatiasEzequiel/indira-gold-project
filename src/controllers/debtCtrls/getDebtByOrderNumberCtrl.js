@@ -5,7 +5,8 @@ const getDebtByOrderNumberCtrl = async (orderNumber) => {
 
     if (orderNumber) {        
         const debts = await Debt.find({})  // Buscar todas las deudas
-            .populate('sale')  // Rellenar el campo 'sale' con los datos completos de la venta
+            .populate('client')
+            .populate('sale')
             .exec();
 
         // Filtra las deudas después de hacer el populate
