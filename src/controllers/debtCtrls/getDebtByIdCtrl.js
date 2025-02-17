@@ -9,7 +9,11 @@ const getDebtByIdCtrl = async (_id) => {
             path: 'client'
         })
         .populate({
-            path: 'sale'
+            path: 'sale',
+            populate: {
+                path: 'products', 
+                model: 'Product'
+            }
         });
         
         return debtById;
