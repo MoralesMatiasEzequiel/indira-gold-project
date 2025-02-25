@@ -2,7 +2,8 @@ const putDebtCtrl = require('../../controllers/debtCtrls/putDebtCtrl.js');
 
 const putDebtHandler = async (req, res) => {
 
-    const { _id, saleId, amount } = req.body;
+    const { _id, saleId, income } = req.body;
+console.log(req.body);
 
     try {
         if (!_id) return res.status(400).json({ error: 'Missing ID' });
@@ -11,11 +12,11 @@ const putDebtHandler = async (req, res) => {
             return res.status(400).send({ error: 'Incorrect DataType - saleId' });
           };
       
-          if (typeof amount !== 'number' || amount <= 0) {
-            return res.status(400).send({ error: 'Incorrect DataType - amount should be a positive number' });
+          if (income && !Array.isArray(income)) {
+            return res.status(400).send({ error: 'Incorrect DataType - income' });
           };
 
-        const debtUpdate = await putDebtCtrl(_id, saleId, amount);
+        const debtUpdate = await putDebtCtrl(_id, saleId, income);
 
         return res.status(200).send(debtUpdate);
 
