@@ -54,7 +54,6 @@ const putDebtCtrl = async (_id, saleId, income) => {
         // 5. Si la deuda está completamente pagada, marcar como inactiva
         if (debt.remainingBalance <= 0) {
             debt.remainingBalance = 0; // Asegurar que no quede saldo negativo
-            debt.active = false;
         }
 
         // 6. Guardar los cambios en la deuda

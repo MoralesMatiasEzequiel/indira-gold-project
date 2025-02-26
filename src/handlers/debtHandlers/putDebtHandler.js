@@ -3,7 +3,6 @@ const putDebtCtrl = require('../../controllers/debtCtrls/putDebtCtrl.js');
 const putDebtHandler = async (req, res) => {
 
     const { _id, saleId, income } = req.body;
-console.log(req.body);
 
     try {
         if (!_id) return res.status(400).json({ error: 'Missing ID' });
