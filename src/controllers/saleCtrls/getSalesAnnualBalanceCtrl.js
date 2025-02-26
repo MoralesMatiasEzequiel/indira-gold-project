@@ -1,10 +1,18 @@
 require('../../db.js');
 const Sale = require('../../collections/Sale.js');
+const Debt = require('../../collections/Debt.js');
+
 
 const getSalesAnnualBalanceCtrl = async (year) => {
 
     try {
         const sales = await Sale.find({active: true}).populate('products');
+        const debts = await Debt.find({active: true});
+
+        const debtMap = new Map();
+        debts.forEach(debt => {
+            debtMap.set(debt.sale.toString(), debt.income.reduce((sum, entry) => sum + entry.amount, 0));
+        });
 
         const annualBalance = {
             soldProducts: 0, 
@@ -17,10 +25,12 @@ const getSalesAnnualBalanceCtrl = async (year) => {
 
         sales.forEach(sale => {
             const saleDate = new Date(sale.date);
+            const totalProductsSold = sale.products.length;
+            const paidAmount = debtMap.has(sale._id.toString()) ? debtMap.get(sale._id.toString()) : sale.totalWithFee;
 
             if (saleDate >= startOfYear && saleDate < endOfYear) {
-                annualBalance.soldProducts += sale.products.length;
-                annualBalance.totalRevenue += sale.totalWithFee;
+                annualBalance.soldProducts += totalProductsSold;
+                annualBalance.totalRevenue += paidAmount;
             }
         });
 
