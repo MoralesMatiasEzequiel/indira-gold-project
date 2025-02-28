@@ -1,4 +1,4 @@
-const getSaleByOrderNumberCtrl = require('../../controllers/saleCtrls/getSaleByOrderNumberCtrl');
+const getSaleByOrderNumberCtrl = require('../../controllers/saleCtrls/getSaleByOrderNumberCtrl.js');
 
 const getSaleByOrderNumberHandlers = async (req, res) => {
 

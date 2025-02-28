@@ -1,5 +1,5 @@
 const debtRouter = require('express').Router();
-const { getDebtsHandler, getActiveDebtsHandler, getDebtByIdHandler, getDebtByOrderNumberHandler, postDebtHandler, getDebtByClientNameHandler, putDebtHandler, putDebtAmountHandler, putDebtStatusHandler } = require('../handlers/debtHandlers/indexHandlers.js');
+const { getDebtsHandler, getActiveDebtsHandler, getDebtByIdHandler, getDebtByOrderNumberHandler, postDebtHandler, getDebtByClientNameHandler, getDebtsByMonthAndYearHandler, putDebtHandler, putDebtAmountHandler, putDebtStatusHandler } = require('../handlers/debtHandlers/indexHandlers.js');
 
 debtRouter.get('/', async (req, res) => {
     
@@ -16,6 +16,7 @@ debtRouter.get('/', async (req, res) => {
     return getActiveDebtsHandler(req, res); 
 });
 debtRouter.get('/all', getDebtsHandler);
+debtRouter.get('/filtered', getDebtsByMonthAndYearHandler);
 debtRouter.get('/:id', getDebtByIdHandler);
 debtRouter.post('/', postDebtHandler);
 debtRouter.put('/', putDebtHandler);

@@ -1,5 +1,5 @@
 const saleRouter = require('express').Router();
-const { getSalesHandlers, getActiveSalesHandler, getSaleByIdHandler, getSaleByOrderNumberHandlers, getSaleByClientNameHandlers, getSalesOnlineHandlers, getSalesLocalHandlers, getSalesBalanceHandlers, getSalesAnnualBalanceHandler, getMonthlySalesByClientHandler, getYearsOfSalesHandler, postSaleHandlers, putSaleStatusHandler, putSaleHandler, deleteSaleHandler } = require('../handlers/saleHandlers/indexHandlers.js');
+const { getSalesHandlers, getActiveSalesHandler, getSaleByIdHandler, getSaleByOrderNumberHandlers, getSaleByClientNameHandlers, getSalesOnlineHandlers, getSalesLocalHandlers, getSalesBalanceHandlers, getSalesAnnualBalanceHandler, getMonthlySalesByClientHandler, getYearsOfSalesHandler, getSalesByMonthAndYearHandler, getBalanceSalesByMonthAndYearHandler, postSaleHandlers, putSaleStatusHandler, putSaleHandler, deleteSaleHandler } = require('../handlers/saleHandlers/indexHandlers.js');
 
 saleRouter.get('/', async (req, res) => {
     
@@ -25,6 +25,8 @@ saleRouter.get('/local', getSalesLocalHandlers);
 saleRouter.get('/balance', getSalesBalanceHandlers);
 saleRouter.get('/years', getYearsOfSalesHandler);
 saleRouter.get('/monthlyByClient/:id', getMonthlySalesByClientHandler);
+saleRouter.get('/filtered', getSalesByMonthAndYearHandler);
+saleRouter.get('/balanceTotals', getBalanceSalesByMonthAndYearHandler);
 saleRouter.get('/:id', getSaleByIdHandler);
 saleRouter.post('/', postSaleHandlers);
 saleRouter.put('/', putSaleHandler);

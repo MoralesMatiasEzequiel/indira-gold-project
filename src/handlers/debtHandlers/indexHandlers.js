@@ -3,6 +3,7 @@ const getActiveDebtsHandler = require('./getActiveDebtsHandler.js');
 const getDebtByIdHandler = require('./getDebtByIdHandler.js');
 const getDebtByOrderNumberHandler = require('./getDebtByOrderNumberHandler.js');
 const getDebtByClientNameHandler = require('./getDebtByClientNameHandler.js');
+const getDebtsByMonthAndYearHandler = require('./getDebtsByMonthAndYearHandler.js');
 const postDebtHandler = require('./postDebtHandler.js');
 const putDebtHandler = require ('./putDebtHandler.js');
 const putDebtAmountHandler = require('./putDebtAmountHandler.js');
@@ -14,6 +15,7 @@ module.exports = {
     getDebtByIdHandler,
     getDebtByOrderNumberHandler,
     getDebtByClientNameHandler,
+    getDebtsByMonthAndYearHandler,
     postDebtHandler,
     putDebtHandler,
     putDebtAmountHandler,
