@@ -5,12 +5,19 @@ const getBalanceSalesByMonthAndYearCtrl = async (month, year) => {
   const filter = { active: true };
 
   if (year && month) {
+    // Convertimos los valores a enteros
+    const parsedYear = parseInt(year);
+    const parsedMonth = parseInt(month);
+
+    const startOfMonth = new Date(parsedYear, parsedMonth, 1);
+    const endOfMonth = new Date(parsedYear, parsedMonth + 1, 1); // El primer día del mes siguiente
+    
     // Filtrar las ventas por el mes y el año
     const sales = await Sale.find({
       ...filter,
       date: {
-        $gte: new Date(year, month, 1), // Fecha de inicio del mes
-        $lt: new Date(year, month + 1, 1) // Fecha de inicio del siguiente mes
+        $gte: startOfMonth, // Fecha de inicio del mes
+        $lt: endOfMonth // Fecha de inicio del siguiente mes
       }
     });
 

@@ -2,8 +2,7 @@ const Debt = require('../../collections/Debt.js');
 
 const getDebtsByMonthAndYearCtrl = async (month, year) => {
     try {
-        const debts = await Debt.find().populate('sale');
-        // const debts = await Debt.find({ active: true}).populate('sale');
+        const debts = await Debt.find({ active: true }).populate('sale');
 
         let totalAmount = 0; 
         let totalDebts = 0;
@@ -29,7 +28,9 @@ const getDebtsByMonthAndYearCtrl = async (month, year) => {
                             const paymentYear = paymentDate.getFullYear();
     
                             if (paymentMonth === parseInt(month) && paymentYear === parseInt(year)) {
-                                totalAmount += payment.amount; // Sumamos pagos realizados
+                                if (saleMonth !== paymentMonth || saleYear !== paymentYear){
+                                    totalAmount += payment.amount; // Sumamos pagos realizados
+                                }
                                 deudaRestante -= payment.amount; // Restamos pagos de la deuda restante
                             }
                         });
@@ -39,7 +40,7 @@ const getDebtsByMonthAndYearCtrl = async (month, year) => {
                 } else {
                     debt.income.forEach(payment => {
                         const paymentDate = new Date(payment.date);
-                        const paymentMonth = paymentDate.getMonth() + 1;
+                        const paymentMonth = paymentDate.getMonth();
                         const paymentYear = paymentDate.getFullYear();
 
                         if (paymentMonth === parseInt(month) && paymentYear === parseInt(year)) {
