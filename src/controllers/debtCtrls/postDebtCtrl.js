@@ -24,16 +24,18 @@ const postDebtCtrl = async (saleId, amount) => {
         };
 
         // Crear la deuda
-        const newDebt = await Debt.create({
+        const newDebt = {
             sale: saleId,
             client: clientId,
             income: [incomeEntry],
             paymentMade: amount,
             remainingBalance,
             active: true
-        });
+        };
 
-        return newDebt;
+        const debtCreated = await Debt.create(newDebt);
+        
+        return debtCreated;
         
     } catch (error) {
         throw new Error(error.message);
