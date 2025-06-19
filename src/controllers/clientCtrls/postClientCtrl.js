@@ -1,6 +1,6 @@
 const Client = require('../../collections/Client.js');
 
-const postClientCtrl = async (dni, name, lastname, email, phone) => {
+const postClientCtrl = async (dni, name, lastname, email, phone, addresses) => {
 
     const clientFound = await Client.findOne({ dni });
 
@@ -13,7 +13,8 @@ const postClientCtrl = async (dni, name, lastname, email, phone) => {
         name,
         lastname,
         email,
-        phone
+        phone,
+        addresses
     };
 
     const clientCreated = await Client.create(newClient);
