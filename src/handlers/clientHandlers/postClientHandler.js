@@ -2,14 +2,14 @@ const postClientCtrl = require('../../controllers/clientCtrls/postClientCtrl.js'
 
 const postClientHandler = async (req, res) => {
     
-    const { dni, name, lastname, email, phone } = req.body;
+    const { dni, name, lastname, email, phone, addresses } = req.body;
 
     try {
         if (!dni || !name || !lastname || !email || !phone) {
             return res.status(400).json({ error: 'Missing required data' });
         }
 
-        const client = await postClientCtrl(dni, name, lastname, email, phone);
+        const client = await postClientCtrl(dni, name, lastname, email, phone, addresses);
         res.status(200).send(client);  //
 
     } catch (error) {
