@@ -2,7 +2,7 @@ require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 const postDebtCtrl = require('../../controllers/debtCtrls/postDebtCtrl.js');
 
-const postSaleCtrl = async (paymentMethod, installments, soldAt, discount, products, client, paymentFee, debtAmount) => {
+const postSaleCtrl = async (paymentMethod, installments, soldAt, discount, products, client, paymentFee, debtAmount, shipment) => {
 
     const subTotal = products.reduce((total, product) => {
         return total + (product.price || 0); // Asegúrate de que cada producto tenga una propiedad price
@@ -36,7 +36,8 @@ const postSaleCtrl = async (paymentMethod, installments, soldAt, discount, produ
         paymentFee,
         paymentFeeApplied,
         totalWithFee,
-        client: client || null
+        client: client || null,
+        shipment
     };
 
     const saleCreated = await Sale.create(newSale);

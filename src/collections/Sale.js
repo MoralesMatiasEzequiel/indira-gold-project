@@ -6,6 +6,15 @@ const { Schema, model } = mongoose;
 const paymentMethodEnum = ['Efectivo', 'Crédito', 'Débito', 'Transferencia'];
 const saldAtEnum = ['Online', 'Local'];
 
+const shipmentSchema = new Schema({
+    address: {
+        type: String,
+    },
+    amount: {
+        type: Number,
+    }
+});
+
 const saleSchema = new Schema({
     orderNumber: {
         type: String,
@@ -15,6 +24,9 @@ const saleSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Client',
         default: null
+    },
+    shipment: {
+        type: [shipmentSchema],
     },
     paymentMethod: {
         type: String,
