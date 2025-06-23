@@ -1,7 +1,7 @@
 const postSaleCtrl = require('../../controllers/saleCtrls/postSaleCtrl.js');
 
 const postSalesHandler = async (req, res) => {
-  const { paymentMethod, installments, soldAt, discount, products, client, paymentFee } = req.body;
+  const { paymentMethod, installments, soldAt, discount, products, client, paymentFee, debtAmount } = req.body;
 
   try {
     if (!paymentMethod || !soldAt || !products) {
@@ -47,7 +47,11 @@ const postSalesHandler = async (req, res) => {
       return res.status(400).send({ error: 'Incorrect DataType - paymentFee' });
     }
 
-    const newSale = await postSaleCtrl(paymentMethod, installments, soldAt, discount, products, client, paymentFee);
+    if (debtAmount && typeof debtAmount !== 'number') {
+      return res.status(400).send({ error: 'Incorrect DataType - debtAmount' });
+    }
+
+    const newSale = await postSaleCtrl(paymentMethod, installments, soldAt, discount, products, client, paymentFee, debtAmount);
 
     res.status(200).send(newSale);
 

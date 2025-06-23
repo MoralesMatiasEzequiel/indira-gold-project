@@ -3,7 +3,6 @@ const Debt = require('../../collections/Debt.js');
 const Sale = require('../../collections/Sale.js');
 
 const postDebtCtrl = async (saleId, amount) => {
-    
     try {
         // Buscar la venta
         const sale = await Sale.findById(saleId);
