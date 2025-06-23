@@ -33,6 +33,19 @@ const clientSchema = new Schema({
         message: 'Invalid telephone'
     },
 
+    addresses: [{
+        name: String,
+        street: String,
+        number: String,
+        between: String,
+        floor: String,
+        apartment: String,
+        city: String,
+        province: String,
+        postalCode: String,
+        reference: String,
+    }],
+
     purchases: [
         {
             productId: {
