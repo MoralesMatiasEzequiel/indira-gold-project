@@ -24,7 +24,7 @@ const putClientCtrl = async (_id, dni, name, lastname, email, phone, addresses, 
         update.phone = phone;
     }
 
-    if (addresses !== null && addresses !== false && addresses.length > 0) {
+    if (addresses !== null && addresses !== false) {
         update.addresses = addresses;
     }
 
