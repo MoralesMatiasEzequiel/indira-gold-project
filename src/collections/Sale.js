@@ -25,9 +25,7 @@ const saleSchema = new Schema({
         ref: 'Client',
         default: null
     },
-    shipment: {
-        type: [shipmentSchema],
-    },
+    shipment: shipmentSchema,
     paymentMethod: {
         type: String,
         enum: paymentMethodEnum,
