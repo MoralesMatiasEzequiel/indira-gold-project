@@ -51,8 +51,8 @@ const postSalesHandler = async (req, res) => {
       return res.status(400).send({ error: 'Incorrect DataType - debtAmount' });
     }
 
-    if (!Array.isArray(shipment)) {
-      return res.status(400).send({ error: 'Incorrect DataType - shipment' });
+    if (typeof shipment !== 'object') {
+      return res.status(400).send({ error: 'Incorrect DataType - shipment must be an object' });
     }
 
     const newSale = await postSaleCtrl(paymentMethod, installments, soldAt, discount, products, client, paymentFee, debtAmount, shipment);
