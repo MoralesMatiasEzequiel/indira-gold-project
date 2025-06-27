@@ -22,10 +22,14 @@ const putIncreasePriceCtrl = async (adjust, porcentage, products, category) => {
             productsDB = await Product.find({ active: true });
         };
 
+        const roundToNearestHundred = (num) => {
+            return Math.round(num / 100) * 100;
+        };
+
         if(adjust && adjust === 'increase'){
             // Aumentar el precio en el porcentaje especificado
         const updatedProducts = await Promise.all(productsDB.map(async (product) => {
-            product.price = product.price + (product.price * (porcentage / 100));
+            product.price = roundToNearestHundred(product.price + (product.price * (porcentage / 100)));
             await product.save(); // Guardar los cambios en la base de datos
             return product;
         }));
@@ -35,7 +39,7 @@ const putIncreasePriceCtrl = async (adjust, porcentage, products, category) => {
         if (adjust && adjust === 'decrease') {
             // Mermar el precio en el porcentaje especificado
             const updatedProducts = await Promise.all(productsDB.map(async (product) => {
-                product.price = product.price - (product.price * (porcentage / 100));
+                product.price = roundToNearestHundred(product.price - (product.price * (porcentage / 100)));
                 await product.save(); // Guardar los cambios en la base de datos
                 return product;
             }));
