@@ -1,7 +1,7 @@
 require('../../db.js');
 const Sale = require('../../collections/Sale.js');
 
-const putSaleCtrl = async (_id, products, discount, paymentFee, subtotal) => {
+const putSaleCtrl = async (_id, products, discount, paymentFee, subtotal, shipment) => {
 
     let newSubTotal = 0;
 
@@ -59,6 +59,7 @@ const putSaleCtrl = async (_id, products, discount, paymentFee, subtotal) => {
         { _id }, 
         {
             $set: {
+                shipment,
                 products,
                 discount,
                 subTotal: newSubTotal,
