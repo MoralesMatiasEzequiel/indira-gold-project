@@ -2,7 +2,7 @@ const putSaleCtrl = require('../../controllers/saleCtrls/putSaleCtrl.js');
 
 const putSaleHandler = async (req, res) => {
 
-    const { _id, products, discount, paymentFee, subtotal } = req.body;
+    const { _id, products, discount, paymentFee, subtotal, shipment } = req.body;
 
     try {
         
@@ -35,7 +35,11 @@ const putSaleHandler = async (req, res) => {
             return res.status(400).send({ error: 'Incorrect DataType - subtotal' });
           }
 
-          const updatedSale = await putSaleCtrl(_id, products, discount, paymentFee, subtotal);
+          if (typeof shipment !== 'object') {
+            return res.status(400).send({ error: 'Incorrect DataType - shipment must be an object' });
+          }
+
+          const updatedSale = await putSaleCtrl(_id, products, discount, paymentFee, subtotal, shipment);
 
           res.status(200).send(`La venta ${_id} ha sido actualizada`);
     } catch (error) {
