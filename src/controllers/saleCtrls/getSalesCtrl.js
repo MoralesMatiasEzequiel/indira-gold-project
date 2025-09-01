@@ -10,10 +10,7 @@ const getSalesCtrl = async () => {
             path: 'client'
         })
         .populate({
-            path: 'products',
-            populate: {
-                path: 'category',
-            }
+            path: 'products'
         });
 
     return sales;

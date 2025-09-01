@@ -41,8 +41,9 @@ const postSaleCtrl = async (paymentMethod, installments, soldAt, discount, produ
     };
 
     const saleCreated = await Sale.create(newSale);
-    
-    if (debtAmount && saleCreated) {
+
+    if (debtAmount !== '' && !isNaN(debtAmount) && saleCreated){
+
         if (isNaN(debtAmount)) {
             return res.status(400).send({ error: 'Incorrect DataType - debtAmount should be a valid number' });
         };
@@ -53,7 +54,7 @@ const postSaleCtrl = async (paymentMethod, installments, soldAt, discount, produ
             return res.status(400).send({ error: 'No sale ID found for a new debt.' });
         };
 
-        const newDebt = await postDebtCtrl(saleId, debtAmount);
+        const newDebt = await postDebtCtrl(saleId, Number(debtAmount));
 
         if (!newDebt) {
             return res.status(400).send({ error: 'Error creating a debt.' });
@@ -68,11 +69,3 @@ const postSaleCtrl = async (paymentMethod, installments, soldAt, discount, produ
 };
 
 module.exports = postSaleCtrl;
-
-
-
-// Obtengo los productos desde la base de datos usando sus IDs
-// const productsID = await Product.find({ '_id': { $in: products } });
-
-// Calculo el precio total sumando los precios de los productos
-// const subTotal = productsID.reduce((total, product) => total + product.price, 0);

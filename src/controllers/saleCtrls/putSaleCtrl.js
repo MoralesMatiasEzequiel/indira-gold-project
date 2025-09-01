@@ -18,7 +18,7 @@ const putSaleCtrl = async (_id, products, discount, paymentFee, subtotal, shipme
     }, {});
 
     // Ajustar precios de los productos nuevos basados en los anteriores
-    const adjustedProducts = products.map(product => {
+    const adjustedProducts = products?.map(product => {
         if (previousProducts[product.productId]) {
             return {
                 ...product,

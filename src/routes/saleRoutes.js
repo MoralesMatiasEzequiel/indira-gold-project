@@ -19,6 +19,7 @@ saleRouter.get('/', async (req, res) => {
 
     return getActiveSalesHandler(req, res); 
 });
+saleRouter.get('/all', getSalesHandlers);
 saleRouter.get('/online', getSalesOnlineHandlers);
 saleRouter.get('/active', getActiveSalesHandler);
 saleRouter.get('/local', getSalesLocalHandlers);

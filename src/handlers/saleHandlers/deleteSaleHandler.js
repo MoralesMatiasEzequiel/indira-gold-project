@@ -1,7 +1,6 @@
 const deleteSaleCtrl = require('../../controllers/saleCtrls/deleteSaleCtrl.js');
 
 const deleteSaleHandler = async (req, res) => {
-    console.log("req");
     
     const { id } = req.params;
 
